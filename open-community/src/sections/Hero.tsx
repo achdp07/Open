@@ -1,5 +1,5 @@
 import { ChevronRight, Zap } from 'lucide-react';
-import heroImage from '../assets/images/Hero.png';
+import heroImage from '../assets/images/hero.png';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
