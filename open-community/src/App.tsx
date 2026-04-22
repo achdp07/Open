@@ -8,6 +8,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/programs/:id" element={<ProgramDetail />} />
       </Routes>
     </BrowserRouter>
   );
