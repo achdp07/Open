@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Join from './pages/Join';
+import ProgramsPage from '../src/pages/ProgramsPage';
+import ProgramDetail from './pages/ProgramDetail';
+
 
 export default function App() {
   return (

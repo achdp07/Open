@@ -1,12 +1,12 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ArrowLeft, Clock, BarChart, Globe, Users, CheckCircle, ChevronRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { programs } from '../data/programs';
 
-const ProgramDetail = () => {
+export default function ProgramDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const program = programs.find((p) => p.id === id);
@@ -14,7 +14,7 @@ const ProgramDetail = () => {
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
-    email: '',
+    email: '',  
     phone: '',
     city: '',
     motivation: '',
@@ -248,4 +248,3 @@ const ProgramDetail = () => {
   );
 };
 
-export default ProgramDetail;

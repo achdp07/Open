@@ -1,11 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
+import { programs } from '../data/programs';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { programs } from '../data/programs';
 
-const ProgramsPage = () => {
+export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-white font-sans">
       <Navbar />
@@ -89,7 +89,7 @@ const ProgramsPage = () => {
       </main>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default ProgramsPage;
+
