@@ -11,6 +11,21 @@ import MemberEvents from './pages/dashboard/member/MemberEvents';
 import MemberSubscription from './pages/dashboard/member/MemberSubscription';
 import MemberProfile from './pages/dashboard/member/MemberProfile';
 
+import AdminLayout from './layouts/AdminLayout';
+import AdminDashboard from '../src/pages/dashboard/Admin/AdminDashboard';
+import AdminUsers from '../src/pages/dashboard/Admin/AdminUsers';
+import AdminPrograms from '../src/pages/dashboard/Admin/AdminPrograms';
+import AdminSettings from '../src/pages/dashboard/Admin/AdminSettings';
+
+import InstructorLayout from './layouts/InstractorLayout';
+import InstructorDashboard from './pages/dashboard/instructor/InstractorDashboard';
+import InstructorPrograms from './pages/dashboard/instructor/InstractorPrograms';
+import InstructorLearners from './pages/dashboard/instructor/InstructorLearners';
+
+import ModeratorLayout from './layouts/ModeratorLayout';
+import ModeratorDashboard from './pages/dashboard/Moderator/ModeratorDashboard';
+import ModeratorCommunity from './pages/dashboard/Moderator/ModeratorCommunity';
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -30,6 +45,29 @@ export default function App() {
           <Route path="subscription" element={<MemberSubscription />} />
           <Route path="profile" element={<MemberProfile />} />
         </Route>
+
+        {/* Admin Dashboard — layout wraps all child routes */}
+        <Route path="/dashboard/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="programs" element={<AdminPrograms />} />
+          <Route path="settings" element={<AdminSettings />} />
+        </Route>
+
+        {/* Instructor Dashboard — layout wraps all child routes */}
+        <Route path="/dashboard/instructor" element={<InstructorLayout />}>
+          <Route index element={<InstructorDashboard />} />
+          <Route path="programs" element={<InstructorPrograms />} />
+          <Route path="learners" element={<InstructorLearners />} />
+        </Route>
+
+        {/* Moderator Dashboard — layout wraps all child routes */}
+        <Route path="/dashboard/moderator" element={<ModeratorLayout />}>
+          <Route index element={<ModeratorDashboard />} />
+          <Route path="community" element={<ModeratorCommunity />} />
+        </Route>
+
+
       </Routes>
     </BrowserRouter>
   );
