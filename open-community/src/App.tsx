@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Join from './pages/Join';
 import ProgramsPage from './pages/ProgramsPage';
@@ -29,6 +30,7 @@ import ModeratorCommunity from './pages/dashboard/Moderator/ModeratorCommunity';
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Public */}
         <Route path="/" element={<Home />} />

@@ -1,6 +1,7 @@
 import { ChevronRight, Zap } from 'lucide-react';
 import heroImage from '../assets/images/hero.png';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
@@ -8,7 +9,11 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
         {/* Left */}
-        <div
+        <motion.div
+          className="relative"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#005C53] text-white rounded-full text-xs font-bold uppercase tracking-wider mb-6">
             <Zap size={14} />
@@ -29,18 +34,21 @@ const Hero = () => {
               Nos programmes
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right */}
-        <div
+        <motion.div
           className="relative"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
         >
           <div className="relative z-10 rounded-[2.5rem] justify-center flex">
-            <img src={heroImage} alt="hero" className="rounded-[2.5rem] w-80 object-contain" />
+            <img src={heroImage} alt="hero" className="rounded-[2.5rem] w-90 object-contain" />
           </div>
-          <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#005C53] rounded-3xl -z-10 rotate-12"></div>
-          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#9FC131] rounded-full -z-10 opacity-50"></div>
-        </div>
+          {/* <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#005C53] rounded-3xl -z-10 rotate-12"></div>
+          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#9FC131] rounded-full -z-10 opacity-50"></div> */}
+        </motion.div>
 
       </div>
     </section>

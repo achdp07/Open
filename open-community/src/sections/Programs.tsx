@@ -1,29 +1,9 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { programs } from '../data/programs';
+import { Link } from 'react-router-dom';
 
 
-const programs = [
-  {
-    title: "Digital Skills Bootcamp",
-    tag: "Débutant",
-    desc: "Maîtrisez les bases du développement web et du design digital."
-  },
-  {
-    title: "AI For Everyone",
-    tag: "Innovation",
-    desc: "Comprendre et utiliser l'IA générative pour booster votre productivité."
-  },
-  {
-    title: "Tech Career Launchpad",
-    tag: "Carrière",
-    desc: "Préparez-vous aux entretiens et construisez un portfolio percutant."
-  },
-  {
-    title: "Innovation Lab",
-    tag: "Projet",
-    desc: "Transformez vos idées en prototypes réels avec l'aide de mentors."
-  }
-];
 
 const Programs = () => {
   return (
@@ -40,10 +20,10 @@ const Programs = () => {
               Des parcours intensifs et pratiques pour transformer votre passion en expertise.
             </p>
           </div>
-          <button className="text-slate-200 font-bold flex items-center gap-2 hover:text-white transition-colors group">
+          <Link to="/programs" className="text-slate-200 font-bold flex items-center gap-2 hover:text-white transition-colors group">
             Voir tous les programmes
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
 
         {/* Cards */}
@@ -61,9 +41,9 @@ const Programs = () => {
                 <span className="px-3 py-1 bg-white/20 text-slate-200 rounded-full text-xs font-bold uppercase tracking-wider">
                   {prog.tag}
                 </span>
-                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                <Link to={`/programs/${prog.id}`} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                   <ArrowRight size={18} />
-                </div>
+                </Link>
               </div>
               <h3 className="text-2xl font-bold mb-4">{prog.title}</h3>
               <p className="text-slate-200 leading-relaxed">{prog.desc}</p>

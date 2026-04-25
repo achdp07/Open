@@ -29,6 +29,10 @@ const WhatWeDo = () => {
             <motion.div
               key={idx}
               whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              // viewport={{ once: true }}
+              transition={{ delay: idx * 0.3 }}
               className="group cursor-pointer"
             >
               <div className={`${act.color} p-8 rounded-[2rem] text-white h-full flex flex-col justify-between shadow-lg transition-all group-hover:shadow-2xl`}>

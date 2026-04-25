@@ -1,4 +1,4 @@
-// import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import communityImg from '../assets/images/rej.png';
 
 const Community = () => {
@@ -8,18 +8,25 @@ const Community = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
 
           {/* Image */}
-          <div className="order-2 md:order-1 relative">
+          <motion.div className="order-2 md:order-1 relative" 
+          initial={{ opacity: 0, x: -50 }} 
+          animate={{ opacity: 1, x: 0 }} 
+          transition={{ duration: 0.5 }}>
             <img
               src={communityImg}
               alt="Community Workshop"
-              className="rounded-[2.5rem] shadow-2xl relative z-10 aspect-square object-cover w-full"
+              className="rounded-[2.5rem] shadow-2xl relative z-10 
+              aspect-square object-cover w-full "
             />
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-100 rounded-full -z-0"></div>
             <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-emerald-50 rounded-full -z-0"></div>
-          </div>
+          </motion.div>
 
           {/* Text */}
-          <div className="order-1 md:order-2">
+          <motion.div className="order-1 md:order-2" 
+          initial={{ opacity: 0, x: 50 }} 
+          animate={{ opacity: 1, x: 0 }} 
+          transition={{ duration: 0.5 }}>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-8">
               La communauté Open!
             </h2>
@@ -30,7 +37,7 @@ const Community = () => {
             <button className="bg-teal-dark text-white px-10 py-4 rounded-2xl font-bold hover:bg-teal-darker transition-all shadow-xl shadow-teal-dark/20">
               Rejoindre Open!
             </button>
-          </div>
+          </motion.div>
 
         </div>
       </div>

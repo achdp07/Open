@@ -9,7 +9,9 @@ export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-white font-sans">
       <Navbar />
-      <main className="pt-32 pb-24">
+      <main 
+
+      className="pt-32 pb-24">
         <div className="max-w-7xl mx-auto px-6">
 
           {/* Header */}
