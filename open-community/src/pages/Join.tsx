@@ -4,6 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import logo from '../assets/images/logo2.png';
 
 type Tab = 'login' | 'register';
 
@@ -74,7 +75,7 @@ export default function Join() {
           {/* Left panel */}
           <div className="bg-teal-dark p-12 flex flex-col justify-between">
             <Link to="/" className="text-2xl font-black text-white">
-              Open<span className="text-lime-bright">!</span>
+              <img src={logo} alt="Logo" className='h-10' />
             </Link>
             <div className="flex flex-col gap-6">
               <h2 className="text-3xl font-black text-white leading-tight">
