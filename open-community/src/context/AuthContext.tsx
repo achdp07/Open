@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { api } from '../services/api';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 
 type DjangoRole = 'STUDENT' | 'TEACHER' | 'MODERATOR' | 'ADMIN';
 type AppRole = 'member' | 'instructor' | 'moderator' | 'admin';
