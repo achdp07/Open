@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo2.png';
 import {
   LayoutDashboard,
@@ -24,6 +24,16 @@ const bottomLinks = [
 ];
 
 export default function MemberLayout() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear the user session (e.g., remove tokens from localStorage)
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    // Redirect to the login page
+    navigate('/join', { replace: true });
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 flex font-sans">
 
@@ -76,7 +86,8 @@ export default function MemberLayout() {
               {link.label}
             </NavLink>
           ))}
-          <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-white/60 hover:text-white hover:bg-white/10 transition-all w-full text-left">
+          <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-white/60 hover:text-white hover:bg-white/10 transition-all w-full text-left" 
+          onClick={handleLogout}>
             <LogOut size={16} />
             Déconnexion
           </button>

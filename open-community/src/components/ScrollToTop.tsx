@@ -5,8 +5,7 @@ const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
   useLayoutEffect(() => {
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
+  window.scrollTo(0, 0);
 }, [pathname]);
 
   return null;

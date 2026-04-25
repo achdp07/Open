@@ -1,22 +1,80 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
-import logo from '../assets/images/logo2.png';
+import { useAuth } from '../context/AuthContext';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 type Tab = 'login' | 'register';
 
-const Join = () => {
+export default function Join() {
+  const { login, register, appRole } = useAuth();
+  const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>('login');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
+  const [registerForm, setRegisterForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+
+  const redirectToDashboard = (role: string | null) => {
+    const routes: Record<string, string> = {
+      admin: '/dashboard/admin',
+      instructor: '/dashboard/instructor',
+      moderator: '/dashboard/moderator',
+      member: '/dashboard/member',
+    };
+    navigate(routes[role ?? 'member'] ?? '/dashboard/member');
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+    try {
+      await login(loginForm.email, loginForm.password);
+      redirectToDashboard(appRole);
+    } catch (err: any) {
+      setError(err.message || 'Erreur de connexion');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+    try {
+      await register({
+        email: registerForm.email,
+        password: registerForm.password,
+        first_name: registerForm.firstName,
+        last_name: registerForm.lastName,
+      });
+      redirectToDashboard('member');
+    } catch (err: any) {
+      setError(err.message || 'Erreur d\'inscription');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
-      <main className="flex items-center justify-center min-h-screen px-6 py-2">
+      <Navbar />
+      <main className="flex items-center justify-center min-h-screen px-6 py-32">
         <div className="w-full max-w-4xl grid md:grid-cols-2 shadow-2xl rounded-[2rem] overflow-hidden">
 
           {/* Left panel */}
           <div className="bg-teal-dark p-12 flex flex-col justify-between">
             <Link to="/" className="text-2xl font-black text-white">
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
+              Open<span className="text-lime-bright">!</span>
             </Link>
             <div className="flex flex-col gap-6">
               <h2 className="text-3xl font-black text-white leading-tight">
@@ -46,7 +104,7 @@ const Join = () => {
               {(['login', 'register'] as Tab[]).map((t) => (
                 <button
                   key={t}
-                  onClick={() => setTab(t)}
+                  onClick={() => { setTab(t); setError(''); }}
                   className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
                     tab === t ? 'bg-white text-teal-dark shadow-sm' : 'text-slate-400'
                   }`}
@@ -55,6 +113,13 @@ const Join = () => {
                 </button>
               ))}
             </div>
+
+            {/* Error */}
+            {error && (
+              <div className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-3 rounded-xl mb-4">
+                {error}
+              </div>
+            )}
 
             {/* Google */}
             <button className="w-full flex items-center justify-center gap-3 border-2 border-slate-200 rounded-xl py-3 text-sm font-semibold hover:border-slate-300 hover:bg-slate-50 transition-all mb-6">
@@ -75,76 +140,129 @@ const Join = () => {
 
             {/* Login form */}
             {tab === 'login' && (
-              <div className="flex flex-col gap-4">
+              <form onSubmit={handleLogin} className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-semibold text-slate-600">Email</label>
-                  <input type="email" placeholder="ton@email.com"
-                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors" />
+                  <input
+                    required
+                    type="email"
+                    placeholder="ton@email.com"
+                    value={loginForm.email}
+                    onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-semibold text-slate-600">Mot de passe</label>
-                  <input type="password" placeholder="••••••••"
-                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors" />
+                  <input
+                    required
+                    type="password"
+                    placeholder="••••••••"
+                    value={loginForm.password}
+                    onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                  />
                 </div>
                 <div className="text-right">
-                  <a href="#" className="text-xs text-teal-dark font-semibold">Mot de passe oublié ?</a>
+                  <a href="#" className="text-xs text-teal-dark font-semibold">
+                    Mot de passe oublié ?
+                  </a>
                 </div>
-                <button className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 group">
-                  Se connecter
-                  <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 group disabled:opacity-60"
+                >
+                  {isLoading ? 'Connexion...' : 'Se connecter'}
+                  {!isLoading && <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />}
                 </button>
                 <p className="text-center text-xs text-slate-400">
                   Pas encore membre ?{' '}
-                  <button onClick={() => setTab('register')} className="text-teal-dark font-bold">
+                  <button
+                    type="button"
+                    onClick={() => setTab('register')}
+                    className="text-teal-dark font-bold"
+                  >
                     Créer un compte
                   </button>
                 </p>
-              </div>
+              </form>
             )}
 
             {/* Register form */}
             {tab === 'register' && (
-              <div className="flex flex-col gap-4">
+              <form onSubmit={handleRegister} className="flex flex-col gap-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-semibold text-slate-600">Prénom</label>
-                    <input type="text" placeholder="Prénom"
-                      className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors" />
+                    <input
+                      required
+                      type="text"
+                      placeholder="Prénom"
+                      value={registerForm.firstName}
+                      onChange={(e) => setRegisterForm({ ...registerForm, firstName: e.target.value })}
+                      className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                    />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-semibold text-slate-600">Nom</label>
-                    <input type="text" placeholder="Nom"
-                      className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors" />
+                    <input
+                      required
+                      type="text"
+                      placeholder="Nom"
+                      value={registerForm.lastName}
+                      onChange={(e) => setRegisterForm({ ...registerForm, lastName: e.target.value })}
+                      className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                    />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-semibold text-slate-600">Email</label>
-                  <input type="email" placeholder="ton@email.com"
-                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors" />
+                  <input
+                    required
+                    type="email"
+                    placeholder="ton@email.com"
+                    value={registerForm.email}
+                    onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
+                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-semibold text-slate-600">Mot de passe</label>
-                  <input type="password" placeholder="••••••••"
-                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors" />
+                  <input
+                    required
+                    type="password"
+                    placeholder="••••••••"
+                    value={registerForm.password}
+                    onChange={(e) => setRegisterForm({ ...registerForm, password: e.target.value })}
+                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                  />
                 </div>
-                <button className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 group">
-                  Créer mon compte
-                  <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 group disabled:opacity-60"
+                >
+                  {isLoading ? 'Création...' : 'Créer mon compte'}
+                  {!isLoading && <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />}
                 </button>
                 <p className="text-center text-xs text-slate-400">
                   Déjà membre ?{' '}
-                  <button onClick={() => setTab('login')} className="text-teal-dark font-bold">
+                  <button
+                    type="button"
+                    onClick={() => setTab('login')}
+                    className="text-teal-dark font-bold"
+                  >
                     Se connecter
                   </button>
                 </p>
-              </div>
+              </form>
             )}
 
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
-};
-
-export default Join;
+}

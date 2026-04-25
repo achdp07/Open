@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { api } from '../services/api';
 
 type DjangoRole = 'STUDENT' | 'TEACHER' | 'MODERATOR' | 'ADMIN';
@@ -35,7 +35,7 @@ const roleMap: Record<DjangoRole, AppRole> = {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({ children }: PropsWithChildren<{}>) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
