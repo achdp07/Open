@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { api } from '../services/api';
+import { PropsWithChildren } from 'react';
 
 type DjangoRole = 'STUDENT' | 'TEACHER' | 'MODERATOR' | 'ADMIN';
 type AppRole = 'member' | 'instructor' | 'moderator' | 'admin';
@@ -64,7 +65,7 @@ export function AuthProvider({ children }: PropsWithChildren<{}>) {
     first_name: string;
     last_name: string;
   }) => {
-    const newUser = await api.register(data);
+    // const newUser = await api.register(data);
     const { token, user } = await api.login({
       email: data.email,
       password: data.password,
