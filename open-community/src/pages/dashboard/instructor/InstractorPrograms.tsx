@@ -70,7 +70,7 @@ export default function InstructorPrograms() {
 
   const myPrograms = programs.filter((p) => myProgramIds.includes(p.id));
   const currentProgram = programs.find((p) => p.id === selectedProgram);
-  const currentStats = programStats[selectedProgram as keyof typeof programStats];
+  // const currentStats = programStats[selectedProgram as keyof typeof programStats];
   const currentModules = modules[selectedProgram] || [];
 
   return (

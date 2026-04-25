@@ -240,13 +240,9 @@ export default function AdminSettings() {
                           <label className="text-xs font-semibold text-slate-600">
                             {field.label}
                           </label>
-                          <input
-                            type="number"
-                            value={security[field.key as keyof typeof security]}
-                            onChange={(e) =>
-                              setSecurity({ ...security, [field.key]: e.target.value })
-                            }
-                            className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                         <input
+                          type="checkbox"
+                          checked={security[field.key as keyof typeof security] as boolean}
                           />
                         </div>
                       ))}
