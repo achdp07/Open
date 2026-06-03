@@ -74,8 +74,7 @@ const Programs = () => {
 
         {/* Error */}
         {error && (
-          <div className="text-center text-white/60 font-semibold py-12">
-            {error}
+          <div>   
           </div>
         )}
 

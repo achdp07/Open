@@ -1,8 +1,8 @@
 const stats = [
-  { value: "500+", label: "Membres" },
-  { value: "30+", label: "Ateliers" },
-  { value: "1000+", label: "Participants" },
-  { value: "20+", label: "Partenaires" }
+  { value: "300+", label: "Membres" },
+  { value: "10+", label: "Ateliers" },
+  { value: "350+", label: "Participants" },
+  { value: "5+", label: "Partenaires" }
 ];
 
 const Impact = () => {
