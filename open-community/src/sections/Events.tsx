@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Calendar, Globe, Brain, Users, Code } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../services/api';
-import { NotFound } from '../components/NotFound';
+import NotFound from '../components/NotFound';
 
 interface Event {
   id: number;
