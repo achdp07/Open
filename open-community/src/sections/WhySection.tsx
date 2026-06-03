@@ -27,7 +27,7 @@ const WhySection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Pourquoi Open! ?
+            Pourquoi Open Community ?
           </h2>
           <div className="w-20 h-1.5 bg-lime-bright mx-auto rounded-full"></div>
         </div>

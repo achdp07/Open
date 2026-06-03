@@ -1,4 +1,3 @@
-
 const stats = [
   { value: "500+", label: "Membres" },
   { value: "30+", label: "Ateliers" },

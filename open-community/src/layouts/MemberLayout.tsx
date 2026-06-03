@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate, Link } from 'react-router-dom';
 import logo from '../assets/images/logo2.png';
 import {
   LayoutDashboard,
@@ -42,9 +42,9 @@ export default function MemberLayout() {
 
         {/* Logo */}
         <div className="px-3 mb-8">
-          <span className="text-xl font-black text-white">
-            <img src={logo} alt="Logo" className='h-10' />
-          </span>
+            <Link to="/" className="text-2xl font-black text-white">
+              <img src={logo} alt="Logo" className='h-10' />
+            </Link>
         </div>
 
         {/* Main nav */}

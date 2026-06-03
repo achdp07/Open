@@ -1,15 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import { useGoogleLogin } from '@react-oauth/google'
 import logo from '../assets/images/logo2.png';
 
 type Tab = 'login' | 'register';
 
 export default function Join() {
-  const { login, register, appRole } = useAuth();
+  const { login, register, googleLogin, appRole } = useAuth();
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>('login');
   const [error, setError] = useState('');
@@ -23,6 +22,10 @@ export default function Join() {
     password: '',
   });
 
+    useEffect(() => {
+    window.scrollTo(0, 0);
+    }, []);
+
   const redirectToDashboard = (role: string | null) => {
     const routes: Record<string, string> = {
       admin: '/dashboard/admin',
@@ -32,6 +35,18 @@ export default function Join() {
     };
     navigate(routes[role ?? 'member'] ?? '/dashboard/member');
   };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        await googleLogin(tokenResponse.access_token);
+        redirectToDashboard(appRole);
+      } catch {
+        setError('Erreur Google Login');
+      }
+    },
+    onError: () => setError('Connexion Google annulée'),
+  });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,9 +82,8 @@ export default function Join() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
-      <Navbar />
-      <main className="flex items-center justify-center min-h-screen px-6 py-32">
+<div className="min-h-screen bg-slate-50 font-sans">
+      <main className="flex items-center justify-center min-h-screen">
         <div className="w-full max-w-4xl grid md:grid-cols-2 shadow-2xl rounded-[2rem] overflow-hidden">
 
           {/* Left panel */}
@@ -115,15 +129,11 @@ export default function Join() {
               ))}
             </div>
 
-            {/* Error */}
-            {error && (
-              <div className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-3 rounded-xl mb-4">
-                {error}
-              </div>
-            )}
-
             {/* Google */}
-            <button className="w-full flex items-center justify-center gap-3 border-2 border-slate-200 rounded-xl py-3 text-sm font-semibold hover:border-slate-300 hover:bg-slate-50 transition-all mb-6">
+            <button
+              onClick={() => handleGoogleLogin()}
+              className="w-full flex items-center justify-center gap-3 border-2 border-slate-200 rounded-xl py-3 text-sm font-semibold hover:border-slate-300 hover:bg-slate-50 transition-all mb-6"
+            >
               <svg width="18" height="18" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -164,6 +174,15 @@ export default function Join() {
                     className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
                   />
                 </div>
+                
+                {/* Error */}
+                {error && (
+                  <div className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-3 rounded-xl mb-4">
+                    {error}
+                  </div>
+                )}
+
+
                 <div className="text-right">
                   <a href="#" className="text-xs text-teal-dark font-semibold">
                     Mot de passe oublié ?
@@ -263,7 +282,6 @@ export default function Join() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
