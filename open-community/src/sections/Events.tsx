@@ -36,6 +36,7 @@ const Events = () => {
   // ── Hooks en haut ──
   const [data, setData] = useState<EventsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  // const [ setError] = useState('');
   const [error, setError] = useState('');
   const [loadingRsvp, setLoadingRsvp] = useState<number | null>(null);
   const [rsvpSuccess, setRsvpSuccess] = useState<number | null>(null);

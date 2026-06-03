@@ -32,6 +32,8 @@ import ModeratorLayout from './layouts/ModeratorLayout';
 import ModeratorDashboard from './pages/dashboard/Moderator/ModeratorDashboard';
 import ModeratorCommunity from './pages/dashboard/Moderator/ModeratorCommunity';
 
+import NotFound from './components/NotFound';
+
 import { useAuth } from './context/AuthContext';
 
 export default function App() {
@@ -123,6 +125,8 @@ export default function App() {
             <Route path="programs" element={<AdminPrograms />} />
             <Route path="settings" element={<AdminSettings />} />
           </Route>
+
+          <Route path="*" element={<NotFound />} />
         </Route>
 
       </Routes>
