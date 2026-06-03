@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // import ScrollToTop from './components/ScrollToTop';
 // import { AnimatePresence } from "framer-motion";
 
@@ -126,7 +126,8 @@ export default function App() {
             <Route path="settings" element={<AdminSettings />} />
           </Route>
 
-          <Route path="*" element={<NotFound />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Route>
 
       </Routes>

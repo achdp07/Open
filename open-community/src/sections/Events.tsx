@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Calendar, Globe, Brain, Users, Code } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../services/api';
+import { NotFound } from '../components/NotFound';
 
 interface Event {
   id: number;
@@ -97,7 +98,7 @@ const Events = () => {
         {/* Error */}
         {error && (
           <div className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-3 rounded-xl mb-8 text-center">
-            {error}
+            <NotFound />
           </div>
         )}
 
