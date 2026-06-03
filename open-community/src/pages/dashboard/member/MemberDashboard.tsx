@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api } from '../../../services/api';
-import { useAuth } from '../../../context/AuthContext';
+// import { useAuth } from '../../../context/AuthContext';
 
 // Types qui correspondent à la réponse Django
 interface DashboardData {
@@ -22,7 +22,7 @@ interface DashboardData {
 }
 
 export default function MemberDashboard() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const [data, setData] = useState<DashboardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');

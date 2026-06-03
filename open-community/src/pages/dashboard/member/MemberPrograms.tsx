@@ -65,6 +65,8 @@ export default function MemberPrograms() {
 
         // Appel 2 — programmes inscrits (avec auth)
       const dashboard: DashboardData = await api.getDashboard();
+      setEnrolledPrograms(dashboard.my_programs);
+
       } catch {
         setError('Erreur lors du chargement des programmes');
       } finally {
@@ -102,13 +104,14 @@ export default function MemberPrograms() {
     // Cherche dans les données locales
     const programIdStr = String(programId);
     const modules = getModulesByProgram(programIdStr);
-    const firstLesson = modules[0]?.lessons[0];
-    if (firstLesson) {
+    const firstModule = modules[0];
+    const firstLesson = firstModule?.lessons[0];
+
+    if (firstModule && firstLesson) {
       navigate(
-        `/dashboard/member/programs/${programIdStr}/modules/${firstLesson.moduleId}/lessons/${firstLesson.id}`
+        `/dashboard/member/programs/${programIdStr}/modules/${firstModule.id}/lessons/${firstLesson.id}`
       );
     }
-  };
 
   // Sépare programmes inscrits et non inscrits
   const myPrograms = allPrograms.filter((p) => isEnrolled(p.id));
@@ -291,4 +294,4 @@ export default function MemberPrograms() {
 
     </div>
   );
-}
+}}
