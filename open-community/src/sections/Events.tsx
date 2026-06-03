@@ -95,9 +95,7 @@ const Events = () => {
         </div>
 
         {/* Error */}
-        {error && (
-          <div className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-3 rounded-xl mb-8 text-center">
-          </div>
+        {error && ( <div></div>
         )}
 
         {/* Loading */}

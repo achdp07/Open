@@ -7,6 +7,7 @@ import logo from '../assets/images/logo2.png';
 
 type Tab = 'login' | 'register';
 
+
 export default function Join() {
   const { login, register, googleLogin, appRole } = useAuth();
   const navigate = useNavigate();
