@@ -1,7 +1,7 @@
 import { } from 'lucide-react'
 // import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo2.png';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaWhatsapp, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -16,14 +16,14 @@ const Footer = () => {
               Construire la génération numérique en formant les jeunes aux compétences de demain.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
+              <a href="https://www.facebook.com/OpenCommunity" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
-                <FaTwitter size={20} /> 
+              <a href="https://whatsapp.com/channel/0029VbBCdmQ7Noa9lMXoZo3Y" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
+                <FaWhatsapp size={20} /> 
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
-                <FaInstagram size={20} />
+              <a href="https://linkedin.com/company/openmr1" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
+                <FaLinkedin size={20} />
               </a>
             </div>
           </div>
