@@ -17,8 +17,13 @@ interface Cohort {
 interface Program {
   id: number;
   title: string;
+  slug: string;
   description: string;
+  objectives: string[];
   level: string;
+  language: string;
+  duration_weeks: number;
+  image: string | null;
   open_cohorts: Cohort[];
 }
 
@@ -137,6 +142,27 @@ export default function ProgramDetail() {
                 </h1>
                 <p className="text-lg text-slate-600 leading-relaxed">
                   {program.description}
+                </p>
+                <p className="text-lg text-slate-600 leading-relaxed">
+                  {program.objectives.length > 0 && (
+                    <>
+                      <strong className="font-semibold text-slate-900">
+                        Objectifs :
+                      </strong>
+                      <ul className="list-disc list-inside mt-2">
+                        {program.objectives.map((obj, idx) => (
+                          <li key={idx}>{obj}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </p>
+                <p className="text-lg text-slate-600 leading-relaxed">
+                  {program.language}
+                </p>
+
+                <p className="text-lg text-slate-600 leading-relaxed">
+                  {program.duration_weeks} semaines
                 </p>
               </motion.div>
 
