@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-// import { useGoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin } from '@react-oauth/google'
 import logo from '../assets/images/logo2.png';
 
 type Tab = 'login' | 'register';
 
 
 export default function Join() {
-  // const { login, register, googleLogin, appRole } = useAuth();
-  const { login, register, appRole } = useAuth();
+  const { login, register, googleLogin, appRole } = useAuth();
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>('login');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const [showPassword, setShowPassword] = useState(false);
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [registerForm, setRegisterForm] = useState({
     firstName: '',
@@ -38,17 +38,17 @@ export default function Join() {
     navigate(routes[role ?? 'member'] ?? '/dashboard/member');
   };
 
-  // const handleGoogleLogin = useGoogleLogin({
-  //   onSuccess: async (tokenResponse) => {
-  //     try {
-  //       await googleLogin(tokenResponse.access_token);
-  //       redirectToDashboard(appRole);
-  //     } catch {
-  //       setError('Erreur Google Login');
-  //     }
-  //   },
-  //   onError: () => setError('Connexion Google annulée'),
-  // });
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        await googleLogin(tokenResponse.access_token);
+        redirectToDashboard(appRole);
+      } catch {
+        setError('Erreur Google Login');
+      }
+    },
+    onError: () => setError('Connexion Google annulée'),
+  });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,7 +133,7 @@ export default function Join() {
 
             {/* Google */}
             <button
-              // onClick={() => handleGoogleLogin()}
+              onClick={() => handleGoogleLogin()}
               className="w-full flex items-center justify-center gap-3 border-2 border-slate-200 rounded-xl py-3 text-sm font-semibold hover:border-slate-300 hover:bg-slate-50 transition-all mb-6"
             >
               <svg width="18" height="18" viewBox="0 0 24 24">
@@ -166,15 +166,37 @@ export default function Join() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-semibold text-slate-600">Mot de passe</label>
-                  <input
-                    required
-                    type="password"
-                    placeholder="••••••••"
-                    value={loginForm.password}
-                    onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
-                    className="border-2 border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-dark transition-colors"
-                  />
+                  <label className="text-xs font-semibold text-slate-600">
+                    Mot de passe
+                  </label>
+
+                  <div className="relative">
+                    <input
+                      required
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="••••••••"
+                      value={loginForm.password}
+                      onChange={(e) =>
+                        setLoginForm({
+                          ...loginForm,
+                          password: e.target.value,
+                        })
+                      }
+                      className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 pr-12 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
+                    >
+                      {showPassword ? (
+                        <EyeOff size={18} />
+                      ) : (
+                        <Eye size={18} />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 
                 {/* Error */}

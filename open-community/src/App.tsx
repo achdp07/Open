@@ -16,16 +16,19 @@ import MemberCommunity from './pages/dashboard/member/MemberCommunity';
 import MemberEvents from './pages/dashboard/member/MemberEvents';
 import MemberSubscription from './pages/dashboard/member/MemberSubscription';
 import MemberProfile from './pages/dashboard/member/MemberProfile';
+import ProgramOverview from './pages/dashboard/member/ProgramOverview'
+import TaskPage from './pages/dashboard/member/TaskPage';
+
 
 import AdminLayout from './layouts/AdminLayout';
 import AdminDashboard from './pages/dashboard/Admin/AdminDashboard';
 import AdminUsers from './pages/dashboard/Admin/AdminUsers';
-import AdminPrograms from './pages/dashboard/Admin/AdminPrograms';
+// import AdminPrograms from './pages/dashboard/Admin/AdminPrograms';
 import AdminSettings from './pages/dashboard/Admin/AdminSettings';
 
 import InstructorLayout from './layouts/InstractorLayout';
 import InstructorDashboard from './pages/dashboard/instructor/InstractorDashboard';
-import InstructorPrograms from './pages/dashboard/instructor/InstractorPrograms';
+// import InstructorPrograms from './pages/dashboard/instructor/InstractorPrograms';
 import InstructorLearners from './pages/dashboard/instructor/InstructorLearners';
 
 import ModeratorLayout from './layouts/ModeratorLayout';
@@ -69,6 +72,9 @@ export default function App() {
           <Route path="/dashboard/member" element={<MemberLayout />}>
             <Route index element={<MemberDashboard />} />
             <Route path="programs" element={<MemberPrograms />} />
+            <Route path="programs/:programId" element={<ProgramOverview />}/>
+            <Route path="programs/:programId/tasks/:taskId" element={<TaskPage />}
+/>
             <Route path="community" element={<MemberCommunity />} />
             <Route path="events" element={<MemberEvents />} />
             <Route path="subscription" element={<MemberSubscription />} />
@@ -88,7 +94,7 @@ export default function App() {
         >
           <Route path="/dashboard/instructor" element={<InstructorLayout />}>
             <Route index element={<InstructorDashboard />} />
-            <Route path="programs" element={<InstructorPrograms />} />
+            {/* <Route path="programs" element={<InstructorPrograms />} /> */}
             <Route path="learners" element={<InstructorLearners />} />
           </Route>
         </Route>
@@ -122,7 +128,7 @@ export default function App() {
           <Route path="/dashboard/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="users" element={<AdminUsers />} />
-            <Route path="programs" element={<AdminPrograms />} />
+            {/* <Route path="programs" element={<AdminPrograms />} /> */}
             <Route path="settings" element={<AdminSettings />} />
           </Route>
 

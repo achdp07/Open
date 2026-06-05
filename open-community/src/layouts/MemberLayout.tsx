@@ -1,105 +1,303 @@
-import { NavLink, Outlet, useNavigate, Link } from 'react-router-dom';
-import logo from '../assets/images/logo2.png';
+import { useState, useEffect } from 'react';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   BookOpen,
   Users,
   Calendar,
   CreditCard,
-  UserCircle,
+  User,
   LogOut,
-  
+  PanelLeft,
 } from 'lucide-react';
+import logo from '../assets/images/logo1.png';
 
 const navLinks = [
-  { to: '/dashboard/member', label: 'Dashboard', icon: <LayoutDashboard size={16} />, end: true },
-  { to: '/dashboard/member/programs', label: 'Mes Programmes', icon: <BookOpen size={16} /> },
-  { to: '/dashboard/member/community', label: 'Communauté', icon: <Users size={16} /> },
-  { to: '/dashboard/member/events', label: 'Événements', icon: <Calendar size={16} /> },
-  { to: '/dashboard/member/subscription', label: 'Abonnement', icon: <CreditCard size={16} /> },
-];
-
-const bottomLinks = [
-  { to: '/dashboard/member/profile', label: 'Mon Profil', icon: <UserCircle size={16} /> },
+  {
+    to: '/dashboard/member',
+    label: 'Dashboard',
+    icon: <LayoutDashboard size={18} />,
+    end: true,
+  },
+  {
+    to: '/dashboard/member/programs',
+    label: 'Programmes',
+    icon: <BookOpen size={18} />,
+  },
+  {
+    to: '/dashboard/member/community',
+    label: 'Communauté',
+    icon: <Users size={18} />,
+  },
+  {
+    to: '/dashboard/member/events',
+    label: 'Événements',
+    icon: <Calendar size={18} />,
+  },
+  {
+    to: '/dashboard/member/subscription',
+    label: 'Abonnement',
+    icon: <CreditCard size={18} />,
+  },
 ];
 
 export default function MemberLayout() {
   const navigate = useNavigate();
 
+  const [collapsed, setCollapsed] = useState(
+    localStorage.getItem('sidebarCollapsed') === 'true'
+  );
+
+  useEffect(() => {
+    localStorage.setItem(
+      'sidebarCollapsed',
+      String(collapsed)
+    );
+  }, [collapsed]);
+
   const handleLogout = () => {
-    // Clear the user session (e.g., remove tokens from localStorage)
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    // Redirect to the login page
-    navigate('/join', { replace: true });
+
+    navigate('/join', {
+      replace: true,
+    });
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex font-sans">
+    <div className="min-h-screen bg-white">
 
-      {/* Sidebar */}
-      <aside className="w-56 bg-teal-dark flex flex-col py-6 px-3 fixed h-full z-40">
+      {/* Desktop Sidebar */}
+      <aside
+        className={`
+          hidden lg:flex
+          fixed
+          left-0
+          top-0
+          h-screen
+          bg-white
+          border-r
+          border-slate-200
+          flex-col
+          transition-all
+          duration-300
+          z-40
+          ${collapsed ? 'w-16' : 'w-64'}
+        `}
+      >
+        {/* Header */}
+        <div className="h-16 px-4 border-b border-slate-200 flex items-center justify-between">
+          {!collapsed && (
+            <h1 className="text-xl font-bold text-slate-900">
+              <img src={logo} alt="Open!" className="w-18" />
+            </h1>
+          )}
 
-        {/* Logo */}
-        <div className="px-3 mb-8">
-            <Link to="/" className="text-2xl font-black text-white">
-              <img src={logo} alt="Logo" className='h-10' />
-            </Link>
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="p-2 rounded-lg hover:bg-white transition"
+          >
+            <PanelLeft size={18} />
+          </button>
         </div>
 
-        {/* Main nav */}
-        <nav className="flex flex-col gap-1 flex-1">
+        {/* Navigation */}
+        <nav className="flex-1 p-3 space-y-1">
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               end={link.end}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all
-                ${isActive
-                  ? 'bg-white/15 text-white'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
-                }`
+                `
+                flex items-center
+                gap-3
+                px-3
+                py-2.5
+                rounded-xl
+                text-sm
+                font-medium
+                transition-all
+
+                ${
+                  isActive
+                    ? 'bg-white text-slate-900 border border-slate-200 shadow-sm'
+                    : 'text-slate-500 hover:bg-white hover:text-slate-900'
+                }
+              `
               }
             >
               {link.icon}
-              {link.label}
+
+              {!collapsed && (
+                <span>{link.label}</span>
+              )}
             </NavLink>
           ))}
         </nav>
 
-        {/* Bottom nav */}
-        <div className="flex flex-col gap-1 border-t border-white/10 pt-4">
-          {bottomLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all
-                ${isActive
-                  ? 'bg-white/15 text-white'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
-                }`
+        {/* Bottom */}
+        <div className="border-t border-slate-200 p-3">
+          <NavLink
+            to="/dashboard/member/profile"
+            className={({ isActive }) =>
+              `
+              flex items-center
+              gap-3
+              px-3
+              py-2.5
+              rounded-xl
+              text-sm
+              font-medium
+              transition-all
+              mb-1
+
+              ${
+                isActive
+                  ? 'bg-white text-slate-900 border border-slate-200 shadow-sm'
+                  : 'text-slate-500 hover:bg-white hover:text-slate-900'
               }
-            >
-              {link.icon}
-              {link.label}
-            </NavLink>
-          ))}
-          <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-white/60 hover:text-white hover:bg-white/10 transition-all w-full text-left" 
-          onClick={handleLogout}>
-            <LogOut size={16} />
-            Déconnexion
+            `
+            }
+          >
+            <User size={18} />
+
+            {!collapsed && (
+              <span>Profil</span>
+            )}
+          </NavLink>
+
+          <button
+            onClick={handleLogout}
+            className="
+              w-full
+              flex
+              items-center
+              gap-3
+              px-3
+              py-2.5
+              rounded-xl
+              text-sm
+              font-medium
+              text-slate-500
+              hover:bg-white
+              hover:text-red-500
+              transition-all
+            "
+          >
+            <LogOut size={18} />
+
+            {!collapsed && (
+              <span>Déconnexion</span>
+            )}
           </button>
         </div>
-
       </aside>
 
-      {/* Main content */}
-      <main className="ml-56 flex-1 p-8">
-        <Outlet />
+      {/* Main */}
+      <main
+        className={`
+          transition-all
+          duration-300
+          min-h-screen
+          ${
+            collapsed
+              ? 'lg:ml-20'
+              : 'lg:ml-64'
+          }
+        `}
+      >
+        {/* Top Bar */}
+        <header className="sticky top-0 z-30 h-16 border-b border-slate-200 bg-white/90 backdrop-blur flex items-center justify-between px-2 lg:px-6">
+          <h2 className="font-semibold text-slate-900">
+            Open Learning
+          </h2>
+
+          <div className="w-9 h-9 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-sm font-bold">
+            A
+          </div>
+        </header>
+
+        {/* Content */}
+        <div className="p-4 lg:p-8 pb-24 lg:pb-8">
+          <Outlet />
+        </div>
       </main>
 
+      {/* Mobile Bottom Navigation */}
+      <div
+        className="
+          lg:hidden
+          fixed
+          bottom-0
+          left-0
+          right-0
+          bg-white
+          border-t
+          border-slate-200
+          h-16
+          flex
+          items-center
+          justify-around
+          z-50
+        "
+      >
+        <NavLink
+          to="/dashboard/member"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? 'text-green-500'
+              : 'text-slate-400'
+          }
+        >
+          <LayoutDashboard size={22} />
+        </NavLink>
+
+        <NavLink
+          to="/dashboard/member/programs"
+          className={({ isActive }) =>
+            isActive
+              ? 'teal-green-500'
+              : 'text-slate-400'
+          }
+        >
+          <BookOpen size={22} />
+        </NavLink>
+
+        <NavLink
+          to="/dashboard/member/community"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-green-500'
+              : 'text-slate-400'
+          }
+        >
+          <Users size={22} />
+        </NavLink>
+
+        <NavLink
+          to="/dashboard/member/events"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-green-500'
+              : 'text-slate-400'
+          }
+        >
+          <Calendar size={22} />
+        </NavLink>
+
+        <NavLink
+          to="/dashboard/member/profile"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-green-500'
+              : 'text-slate-400'
+          }
+        >
+          <User size={22} />
+        </NavLink>
+      </div>
     </div>
   );
 }

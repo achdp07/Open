@@ -43,7 +43,7 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-6">Contact</h4>
             <ul className="space-y-4 text-slate-400 text-sm">
-              <li>openmr.contact@gmail.com</li>
+              <li>contact@open-com.org</li>
               <li>+222 41 05 21 18</li>
               <li>Nouakchott, Mauritanie</li>
             </ul>
