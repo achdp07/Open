@@ -144,18 +144,7 @@ export default function ProgramDetail() {
                   {program.description}
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
-                  {program.objectives.length > 0 && (
-                    <>
-                      <strong className="font-semibold text-slate-900">
-                        Objectifs :
-                      </strong>
-                      <ul className="list-disc list-inside mt-2">
-                        {program.objectives.map((obj, idx) => (
-                          <li key={idx}>{obj}</li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
+                  {program.objectives}
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
                   {program.language}
