@@ -6,9 +6,10 @@ import { api } from '../services/api';
 interface Event {
   id: number;
   title: string;
-  date: string;
+  start_time: string;
+  end_time: string;
   location: string;
-  type: string;
+  event_type: string;
   is_registered: boolean;
   is_past: boolean;
   meeting_link: string | null;
@@ -126,7 +127,7 @@ const Events = () => {
                   >
                     {/* Icon */}
                     <div className="w-14 h-14 bg-teal-dark/20 text-teal-dark rounded-2xl flex items-center justify-center mb-6">
-                      {getEventIcon(event.type)}
+                      {getEventIcon(event.event_type)}
                     </div>
 
                     {/* Info */}
@@ -143,7 +144,7 @@ const Events = () => {
 
                     <div className="flex items-center gap-2 text-slate-500 text-sm mb-1">
                       <Calendar size={14} />
-                      {new Date(event.date).toLocaleDateString('fr-FR', {
+                      {new Date(event.start_time).toLocaleDateString('fr-FR', {
                         day: 'numeric',
                         month: 'long',
                         year: 'numeric',

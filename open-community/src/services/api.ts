@@ -137,7 +137,7 @@ export const api = {
   },
 
   rsvpEvent: async (eventId: number) => {
-    const res = await fetch(`${BASE_URL}/api/courses/events/${eventId}/rsvp/`, {
+    const res = await fetch(`${BASE_URL}/api/courses/events/dashboard/${eventId}/rsvp/`, {
       method: 'POST',
       headers: authHeaders(),
     });

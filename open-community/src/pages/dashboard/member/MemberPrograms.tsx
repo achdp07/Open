@@ -1,16 +1,34 @@
 import { useNavigate, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, BookOpen } from 'lucide-react';
-import Programs from '../../../data/programs';
+import { api } from '../../../services/api';
+
+interface Program {
+  id: number;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  image?: string;
+  level: string;
+  language: string;
+  duration_weeks: number;
+  objectives: string[];
+  is_enrolled: boolean;
+  progress: number;
+}
 
 const getLevelLabel = (level: string) => {
-  switch (level?.toLowerCase()) {
-    case 'beginner':
+  switch (level?.toUpperCase()) {
+    case 'DEBUTANT':
       return 'Débutant';
-    case 'intermediate':
+    case 'INTERMEDIAIRE':
       return 'Intermédiaire';
-    case 'advanced':
+    case 'AVANCE':
       return 'Avancé';
+    case 'INNOVATION':
+      return 'Innovation';
     default:
       return level;
   }
@@ -19,13 +37,47 @@ const getLevelLabel = (level: string) => {
 export default function MemberPrograms() {
   const navigate = useNavigate();
 
-  const myPrograms = Programs.filter((p) => p.enrolled);
-  const otherPrograms = Programs.filter((p) => !p.enrolled);
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadPrograms = async () => {
+      try {
+        const data = await api.getPrograms();
+        setPrograms(data);
+      } catch (error) {
+        console.error('Failed to load programs:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPrograms();
+  }, []);
+
+  const myPrograms = programs.filter((p) => p.is_enrolled);
+  const otherPrograms = programs.filter((p) => !p.is_enrolled);
 
   const openProgram = (programId: number) => {
     navigate(`/dashboard/member/programs/${programId}`);
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        Chargement...
+      </div>
+    );
+  }
+  console.log("Programs:", programs);
+
+  programs.forEach((p) => {
+    console.log({
+      title: p.title,
+      is_enrolled: p.is_enrolled,
+      type: typeof p.is_enrolled,
+    });
+  });
   return (
     <div className="flex flex-col gap-8">
       <div>

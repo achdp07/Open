@@ -6,9 +6,10 @@ import { api } from '../../../services/api';
 interface Event {
   id: number;
   title: string;
-  date: string;
+  start_time: string;
+  end_time: string;
   location: string;
-  type: string;
+  event_type: string;
   is_registered: boolean;
   is_past: boolean;
   meeting_link: string | null;
@@ -159,11 +160,11 @@ export default function MemberEvents() {
             {/* Top */}
             <div className="flex justify-between items-start mb-4">
               <div className="w-12 h-12 bg-teal-dark/10 text-teal-dark rounded-2xl flex items-center justify-center">
-                {getEventIcon(event.type)}
+                {getEventIcon(event.event_type)}
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-500">
-                  {event.type}
+                  {event.event_type}
                 </span>
                 {event.is_registered && !event.is_past && (
                   <span className="text-xs font-bold px-3 py-1 rounded-full bg-teal-dark/10 text-teal-dark">
@@ -178,7 +179,7 @@ export default function MemberEvents() {
             <div className="flex flex-col gap-1.5 mb-5">
               <div className="flex items-center gap-2 text-xs text-slate-500">
                 <Calendar size={13} />
-                {new Date(event.date).toLocaleDateString('fr-FR', {
+                {new Date(event.start_time).toLocaleDateString('fr-FR', {
                   day: 'numeric',
                   month: 'long',
                   year: 'numeric',

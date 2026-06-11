@@ -75,6 +75,7 @@ export default function Join() {
         first_name: registerForm.firstName,
         last_name: registerForm.lastName,
       });
+      console.log("appRole =", appRole);
       redirectToDashboard('member');
     } catch (err: any) {
       setError(err.message || 'Erreur d\'inscription');

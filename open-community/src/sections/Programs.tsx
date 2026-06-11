@@ -81,7 +81,7 @@ const Programs = () => {
         {/* Programs Grid */}
         {!isLoading && !error && (
           <div className="grid md:grid-cols-3 gap-8">
-            {programs.slice(0, 4).map((prog, idx) => (
+            {programs.slice(0, 6).map((prog, idx) => (
               <motion.div
                 key={prog.id}
                 initial={{ opacity: 0, y: 20 }}

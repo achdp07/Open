@@ -16,13 +16,13 @@ const Footer = () => {
               Construire la génération numérique en formant les jeunes aux compétences de demain.
             </p>
             <div className="flex gap-4">
-              <a href="https://www.facebook.com/OpenCommunity" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
+              <a href="https://www.facebook.com/OpenCommunity" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
                 <FaFacebook size={20} />
               </a>
-              <a href="https://whatsapp.com/channel/0029VbBCdmQ7Noa9lMXoZo3Y" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
+              <a href="https://whatsapp.com/channel/0029VbBCdmQ7Noa9lMXoZo3Y" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
                 <FaWhatsapp size={20} /> 
               </a>
-              <a href="https://linkedin.com/company/openmr1" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
+              <a href="https://linkedin.com/company/openmr1" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lime-bright transition-all">
                 <FaLinkedin size={20} />
               </a>
             </div>
