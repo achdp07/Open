@@ -1,5 +1,6 @@
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+
 // Helper to get auth headers
 const authHeaders = () => {
   const access = localStorage.getItem('access');
@@ -141,6 +142,34 @@ export const api = {
       method: 'POST',
       headers: authHeaders(),
     });
+    return handleResponse(res);
+  },
+
+
+  // ---------- PUBLIC EVENTS API 
+  getPublicEvents: async () => {
+    const res = await fetch(
+      `${BASE_URL}/api/events/`)
+  
+    const data = await res.json();
+  
+    return data;
+  },
+  
+  registerPublicEvent: async (data: any) => {
+    const res = await fetch(
+      `${BASE_URL}/api/events/register/`,
+      {
+        method: 'POST',
+  
+        headers: {
+          'Content-Type': 'application/json',
+        },
+  
+        body: JSON.stringify(data),
+      }
+    );
+  
     return handleResponse(res);
   },
 

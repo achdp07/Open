@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Join from './pages/Join';
 import ProgramsPage from './pages/ProgramsPage';
 import ProgramDetail from './pages/ProgramDetail';
+import Indabax from './pages/IndabaX/IndabaX';
 
 import MemberLayout from './layouts/MemberLayout';
 import MemberDashboard from './pages/dashboard/member/MemberDashboard';
@@ -56,9 +57,12 @@ export default function App() {
       <Routes>
         {/* Public */}
         <Route path="/" element={<Home />} />
-        <Route path="/join" element={<Join />} />
+        {/* <Route path="/join" element={<Join />} /> */}
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/programs/:id" element={<ProgramDetail />} />
+        <Route path="/indabax" element={<Indabax />} />
+
+
 
         {/* Member */}
         <Route
