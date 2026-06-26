@@ -9,13 +9,7 @@ import {
   ChevronDown,
   CheckCircle,
   ChevronRight,
-  Link2,
 } from 'lucide-react';
-import {
-  FaFacebook,
-  FaWhatsapp,
-  FaLinkedin,
-} from "react-icons/fa";
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -39,8 +33,6 @@ import { api } from '../../services/api';
 export default function IndabaXMauritania() {
   const navigate = useNavigate();
   const [showSelectedEvent, setSelectedEvent] = useState(false);
-
-  const [copied, setCopied] = useState(false);
 
   const [loading, setLoading] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
@@ -1224,38 +1216,6 @@ useEffect(() => {
       </main>
 
       <Footer />
-      <AnimatePresence>
-      {copied && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.25 }}
-          className="
-            fixed
-            bottom-6
-            right-6
-            z-50
-            bg-slate-900
-            text-white
-            px-5
-            py-3
-            rounded-xl
-            shadow-2xl
-            flex
-            items-center
-            gap-3
-          "
-        >
-          <CheckCircle
-            size={18}
-            className="text-lime-bright"
-          />
-
-          Lien copié dans le presse-papiers
-        </motion.div>
-      )}
-    </AnimatePresence>
     </div>
   );
 }
