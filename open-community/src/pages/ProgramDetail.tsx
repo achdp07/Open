@@ -261,9 +261,11 @@ export default function ProgramDetail() {
                   ) : (
                     <>
                       <div className="mb-6">
-                        <h3 className="text-xl font-bold text-slate-900 mb-1">
+                        <Link 
+                        to="/indabax"
+                        className="text-xl font-bold text-slate-900 mb-1">
                           S'inscrire
-                        </h3>
+                        </Link>
                         {activeCohort && (
                           <p className="text-sm text-slate-500">
                             Début le{' '}

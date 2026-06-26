@@ -211,7 +211,7 @@ const Navbar = () => {
               <button
               key={link.name}
               onClick={() => navigateTo(link)}
-                className="text-lg font-medium text-slate-600 text-left"
+                className="text-lg font-medium text-slate-600 text-left rounded-2xl"
               >
                 {link.name}
               </button>
@@ -229,7 +229,7 @@ const Navbar = () => {
             <Link
               to="/indabax?register=true"
               onClick={() => setIsOpen(false)}
-              className="bg-teal-dark text-white px-6 py-3 rounded-xl text-center font-semibold"
+              className="bg-teal-dark text-white px-6 py-3 rounded-full text-center font-semibold"
             >
               S'inscrire à IndabaX
             </Link>
