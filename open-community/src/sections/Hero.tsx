@@ -2,10 +2,13 @@ import { ChevronRight, Zap } from 'lucide-react';
 import heroImage from '../assets/images/hero.png';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import bann from '../assets/images/bann.jpg';
 
 const Hero = () => {
   return (
-    <section className="relative pt-20 overflow-hidden md:min-h-screen md:flex md:items-center">
+    <section className="relative pt-20 overflow-hidden md:min-h-screen md:flex md:items-center 
+     ">
+      <div className=""></div>
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
         {/* Left */}
@@ -13,14 +16,15 @@ const Hero = () => {
           className="relative"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#005C53] text-white rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+          {/* <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#005C53] text-white rounded-full text-xs font-bold uppercase tracking-wider mb-6">
             <Zap size={14} />
             Génération Numérique
-          </div>
+          </div> */}
           <h1 className="text-5xl md:text-5xl font-bold text-slate-900 leading-[1.1] mb-6">
-            Open Community ! Construire la <span className="text-[#005C53]">génération</span> numérique
+            Construire la  <span className="block text-[#005C53]">génération</span> numérique
           </h1>
           <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-lg">
             Une communauté qui forme les jeunes aux compétences numériques, à l'innovation et aux technologies de demain.
