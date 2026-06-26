@@ -41,7 +41,7 @@ export default function IndabaXMauritania() {
 
   const [opened, setOpened] = useState<number | null>(0);
 
-  // const [error, setError] = useState('');
+  const [error, setError] = useState('');
 
   const [form, setForm] = useState({
     first_name: '',
@@ -217,7 +217,6 @@ useEffect(() => {
     } catch (err: any) {
       setError(err.message);
     }
-
     setLoading(false);
   };
 
@@ -811,7 +810,8 @@ useEffect(() => {
                           type="email"
                           placeholder="ton@email.com"
                           onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none 
+                          focus:border-teal-dark transition-colors"
                         />
 
                       </div>
@@ -874,9 +874,26 @@ useEffect(() => {
                           type="text"
                           placeholder="Étudiant, Ingénieur..."
                           onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                          className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.profession
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
                         />
-
+                      {errors.profession && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.profession}
+                        </p>
+                      )}
                       </div>
 
                       {/* Organisation */}
