@@ -41,7 +41,9 @@ export default function IndabaXMauritania() {
 
   const [opened, setOpened] = useState<number | null>(0);
 
-  const [error, setError] = useState('');
+  // For form validation errors (an object)
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
 
   const [form, setForm] = useState({
     first_name: '',
@@ -53,7 +55,9 @@ export default function IndabaXMauritania() {
     organization: '',
     motivation: '',
     source: '',
-    accepted_terms: true,
+    heard_from: '',
+    heard_from_other: '',
+    accepted_terms: false,
   });
 
   const organizers = [
@@ -73,7 +77,6 @@ export default function IndabaXMauritania() {
       className: "h-14",
     },
   ];
-
 
   const agenda = [
     {
@@ -203,26 +206,52 @@ useEffect(() => {
   ) => {
     e.preventDefault();
 
+    const newErrors: Record<string, string> = {};
+
+    if (!form.first_name.trim())
+      newErrors.first_name = "Le prénom est obligatoire.";
+
+    if (!form.last_name.trim())
+      newErrors.last_name = "Le nom est obligatoire.";
+
+    if (!form.email.trim())
+      newErrors.email = "L'email est obligatoire.";
+
+    if (!form.phone.trim())
+      newErrors.phone = "Le numéro WhatsApp est obligatoire.";
+
+    if (!form.city.trim())
+      newErrors.city = "La ville est obligatoire.";
+
+    if (!form.profession.trim())
+      newErrors.profession = "La profession est obligatoire.";
+
+    if (!form.motivation.trim())
+      newErrors.motivation = "La motivation est obligatoire.";
+
+    if (!form.heard_from)
+      newErrors.heard_from = "Veuillez sélectionner une option.";
+
+    if (!form.accepted_terms)
+      newErrors.accepted_terms =
+        "Vous devez accepter les conditions.";
+
     setLoading(true);
 
-    try {
-      await api.registerPublicEvent({
-        event_slug: 'indabax-mr-2026',
-
-        ...form,
-      });
-
-      setSuccess(true);
-
-    } catch (err: any) {
-      setError(err.message);
-    }
-    setLoading(false);
-  };
-
- 
-
-
+      try {
+        await api.registerPublicEvent({
+          event_slug: 'indabax-mr-2026',
+  
+          ...form,
+        });
+  
+        setSuccess(true);
+  
+        } catch (err: any) {
+          setErrors(err.message);
+        }
+        setLoading(false);
+  }; 
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -350,13 +379,14 @@ useEffect(() => {
                 >
                   Je réserve ma place
                 </button>
-
+                
                 <RegistrationModal
                   isOpen={showSelectedEvent}
                   onClose={() => setSelectedEvent(false)}
-                  eventSlug={showSelectedEvent?.eventSlug || ''}
-                  eventTitle={showSelectedEvent?.eventTitle || ''}
+                  eventSlug="indabax-mr-2026"
+                  eventTitle="IndabaX Mauritanie 2026"
                 />
+                
                   
 
               </div>
@@ -768,8 +798,19 @@ useEffect(() => {
                             type="text"
                             placeholder="Prénom"
                             onChange={handleChange}
-                            className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
-                          />
+                            className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
+                        ${
+                          errors.first_name
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}/>
+
+                        {errors.first_name && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.first_name}
+                          </p>
+                          )}
 
                         </div>
 
@@ -787,8 +828,7 @@ useEffect(() => {
                             type="text"
                             placeholder="Nom"
                             onChange={handleChange}
-                            className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
-                          />
+                            />
 
                         </div>
 
@@ -810,10 +850,20 @@ useEffect(() => {
                           type="email"
                           placeholder="ton@email.com"
                           onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none 
-                          focus:border-teal-dark transition-colors"
+                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
+                        ${
+                          errors.email
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
+                          
                         />
-
+                      {errors.email && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.email}
+                        </p>
+                      )}
                       </div>
 
                       {/* WhatsApp */}
@@ -835,6 +885,7 @@ useEffect(() => {
                           className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
                         />
 
+
                       </div>
 
                       {/* Ville */}
@@ -853,8 +904,20 @@ useEffect(() => {
                           type="text"
                           placeholder="Nouakchott"
                           onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
-                        />
+                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
+                        ${
+                          errors.city
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
+                          
+                          />
+                        {errors.city && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.city}
+                          </p>
+                        )}
 
                       </div>
 
@@ -882,11 +945,7 @@ useEffect(() => {
                         text-sm
                         transition-colors
                         focus:outline-none
-                        ${
-                          errors.profession
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
+                        
                       `}
                         />
                       {errors.profession && (
@@ -911,9 +970,18 @@ useEffect(() => {
                           type="text"
                           placeholder="Université, entreprise..."
                           onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
-                        />
-
+                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
+                        ${
+                          errors.organization
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}/>
+                        {errors.organization && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.organization}
+                          </p>
+                        )}
                       </div>
 
                       {/* Motivation */}
@@ -952,9 +1020,19 @@ useEffect(() => {
                           type="text"
                           placeholder="Facebook, LinkedIn..."
                           onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
+                        ${
+                          errors.source
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
                         />
-
+                      {errors.source && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.source}
+                        </p>
+                      )}
                       </div>
 
                       <button
