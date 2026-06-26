@@ -1,8 +1,7 @@
-import { ChevronRight, Zap } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import heroImage from '../assets/images/hero.png';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import bann from '../assets/images/bann.jpg';
 
 const Hero = () => {
   return (
