@@ -8,6 +8,7 @@ import { User, Settings, LogOut, BookOpen } from 'lucide-react';
 
 const navLinks = [
   { name: 'Accueil', href: '/' },
+  { name: 'IndabaX', href: '/indabax' },
   { name: 'A propos', href: '#about' },
   { name: 'Programmes', href: '#programs' },
   { name: 'Evenements', href: '#events' },
@@ -132,10 +133,10 @@ const Navbar = () => {
             </div>
           ) : (
             <Link
-              to="/join"
+              to="/indabax"
               className="bg-teal-dark text-white px-6 py-2.5 rounded-full text-sm font-semibold"
             >
-              Se connecter
+              S'inscrire
             </Link>
           )}
         </div>

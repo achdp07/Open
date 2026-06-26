@@ -1,10 +1,6 @@
 import alx from '../assets/images/alx.png';
 import unesco from '../assets/images/unesco.png';
 import gdc from '../assets/images/gdc.png';
-import mih from '../assets/images/2mih.png';
-import indaba from '../assets/images/indaba.png';
-
-
 
 const Partners = () => {
   return (
@@ -19,10 +15,6 @@ const Partners = () => {
           <img src={unesco} className="h-12 object-contain" alt="UNESCO" />
           <img src={alx} className="h-12 object-contain" alt="ALX" />
           <img src={gdc} className="h-6 object-contain" alt="GDC" />
-          <img src={mih} className="h-6 object-contain" alt="2mih" />
-          <img src={indaba} className="h-6 object-contain" alt="indaba" />
-
-          
         </div>
 
       </div>

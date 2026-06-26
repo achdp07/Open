@@ -18,6 +18,7 @@ export default function RegistrationModal({
 }: Props) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const referralOptions = [
     'Facebook',
@@ -52,14 +53,20 @@ export default function RegistrationModal({
 
   const handleChange = (
     e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement 
+    
     >
   ) => {
     const { name, value } = e.target;
-
+  
     setForm((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
     }));
   };
 
@@ -67,6 +74,44 @@ export default function RegistrationModal({
     e: React.FormEvent
   ) => {
     e.preventDefault();
+
+    const newErrors: Record<string, string> = {};
+
+    if (!form.first_name.trim())
+      newErrors.first_name = "Le prénom est obligatoire.";
+
+    if (!form.last_name.trim())
+      newErrors.last_name = "Le nom est obligatoire.";
+
+    if (!form.email.trim())
+      newErrors.email = "L'email est obligatoire.";
+
+    if (!form.phone.trim())
+      newErrors.phone = "Le numéro WhatsApp est obligatoire.";
+
+    if (!form.city.trim())
+      newErrors.city = "La ville est obligatoire.";
+
+    if (!form.profession.trim())
+      newErrors.profession = "La profession est obligatoire.";
+
+    if (!form.motivation.trim())
+      newErrors.motivation = "La motivation est obligatoire.";
+
+    if (!form.heard_from)
+      newErrors.heard_from = "Veuillez sélectionner une option.";
+
+    if (!form.accepted_terms)
+      newErrors.accepted_terms =
+        "Vous devez accepter les conditions.";
+
+    console.log(newErrors);
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
 
     setLoading(true);
 
@@ -90,10 +135,15 @@ export default function RegistrationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex justify-center items-center p-4">
+    <div
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-center items-center p-4"
+      onClick={onClose}
+    >
 
-      <div className="bg-white rounded-3xl w-120 max-w-2xl p-8 max-h-[90vh] overflow-y-auto relative hide-scrollbar">
-
+  <div
+      onClick={(e) => e.stopPropagation()}
+      className="bg-white rounded-3xl w-full max-w-2xl p-8 max-h-[90vh] overflow-y-auto relative hide-scrollbar shadow-2xl"
+    >
         <button
           onClick={onClose}
           className="absolute top-5 right-5"
@@ -104,6 +154,11 @@ export default function RegistrationModal({
         <h2 className="text-3xl font-bold mb-2">
           {eventTitle}
         </h2>
+
+        <p className="text-slate-500 mb-8">
+          Remplissez ce formulaire pour réserver gratuitement votre place.
+          Vous recevrez un email de confirmation après validation.
+        </p>
 
         {success ? (
 
@@ -144,9 +199,26 @@ export default function RegistrationModal({
                 type="text"
                 placeholder="Prénom"
                 onChange={handleChange}
-                className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.first_name
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
               />
-
+              {errors.first_name && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.first_name}
+                </p>
+              )}
             </div>
 
             <div className="flex flex-col gap-1.5">
@@ -163,8 +235,26 @@ export default function RegistrationModal({
                 type="text"
                 placeholder="Nom"
                 onChange={handleChange}
-                className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+                className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.last_name
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
               />
+              {errors.last_name && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.last_name}
+                </p>
+              )}
 
             </div>
 
@@ -186,8 +276,26 @@ export default function RegistrationModal({
               type="email"
               placeholder="ton@email.com"
               onChange={handleChange}
-              className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+              className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.email
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
             />
+            {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.email}
+                </p>
+              )}
 
           </div>
 
@@ -207,9 +315,26 @@ export default function RegistrationModal({
               type="tel"
               placeholder="+222 xx xx xx xx"
               onChange={handleChange}
-              className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+              className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.phone
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
             />
-
+            {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.phone}
+                </p>
+              )}
           </div>
 
           {/* Ville */}
@@ -228,9 +353,26 @@ export default function RegistrationModal({
               type="text"
               placeholder="Nouakchott"
               onChange={handleChange}
-              className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+              className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.first_name
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
             />
-
+            {errors.city && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.city}
+                </p>
+              )}
           </div>
 
           {/* Profession */}
@@ -249,8 +391,26 @@ export default function RegistrationModal({
               type="text"
               placeholder="Étudiant, Ingénieur..."
               onChange={handleChange}
-              className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+              className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.profession
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
             />
+            {errors.profession && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.profession}
+                </p>
+              )}
 
           </div>
 
@@ -306,20 +466,26 @@ export default function RegistrationModal({
               name="heard_from"
               value={form.heard_from}
               onChange={handleChange}
-              className=" 
-                w-full
-                rounded-2xl
-                border
-                border-slate-300
-                px-4
-                py-4
-                bg-white
-                text-slate-700
-                focus:outline-none
-                focus:ring-2
-                focus:ring-teal-dark
-              "
+              className={`
+                        border-2
+                        rounded-xl
+                        px-3
+                        py-2.5
+                        text-sm
+                        transition-colors
+                        focus:outline-none
+                        ${
+                          errors.heard_from
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
+                      `}
             >
+              {errors.heard_from && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.heard_from }
+                </p>
+              )}
               <option value="">Sélectionnez une option</option>
 
               {referralOptions.map((option) => (
@@ -339,7 +505,7 @@ export default function RegistrationModal({
             <input
               type="text"
               name="heard_from_other"
-              value={formData.heard_from_other}
+              value={form.heard_from_other}
               onChange={handleChange}
               placeholder="Précisez..."
               className="
@@ -357,25 +523,82 @@ export default function RegistrationModal({
           </div>
         )}
 
+        <div className="flex items-start gap-3">
+          <input
+            id="terms"
+            type="checkbox"
+            checked={form.accepted_terms}
+            onChange={(e) =>
+              setForm((prev) => ({
+                ...prev,
+                accepted_terms: e.target.checked,
+              }))
+            }
+            className={`
+              w-full
+              rounded-xl
+              border-2
+              px-4
+              py-3
+              bg-white
+              text-sm
+              transition-colors
+              focus:outline-none
+              ${
+                errors.heard_from
+                  ? "border-red-500"
+                  : "border-slate-200 focus:border-teal-dark"
+              }
+            `}
+          />
+
+          <label
+            htmlFor="terms"
+            className="text-sm text-slate-600 leading-relaxed"
+
+          >
+            J'accepte les conditions de participation ainsi que la politique
+            de confidentialité d'Open Community.
+          </label>
+          {errors.accepted_terms && (
+            <p className="text-red-500 text-xs">
+              {errors.accepted_terms}
+            </p>
+          )}
+        </div>
+
+        <p className="text-center text-xs text-slate-500">
+          L'inscription est <span className="font-semibold text-teal-dark">gratuite</span>.
+          Aucune information ne sera partagée avec des tiers.
+        </p>
+
+
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !form.accepted_terms}
             className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-2"
           >
+            {loading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                Inscription...
+              </>
+            ) : (
+              <>
+                Confirmer mon inscription
+                <ChevronRight size={16} />
+              </>
 
-            {loading
-              ? 'Inscription...'
-              : 'Confirmer mon inscription'}
-
-            {!loading && (
-              <ChevronRight size={16} />
+              
             )}
-
           </button>
 
         </form>
 
+
+
         )}
+        
 
       </div>
 
