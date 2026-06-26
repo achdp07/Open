@@ -46,7 +46,7 @@ export default function RegistrationModal({
     source: '',
     heard_from: '',
     heard_from_other: '',
-    accepted_terms: true,
+    accepted_terms: false,
   });
 
   if (!isOpen) return null;
@@ -461,40 +461,50 @@ export default function RegistrationModal({
             <label className="block mb-2 font-semibold text-slate-700">
               Comment avez-vous entendu parler de nous ?
             </label>
-
+          <div className="relative">
             <select
               name="heard_from"
               value={form.heard_from}
               onChange={handleChange}
               className={`
-                        border-2
-                        rounded-xl
-                        px-3
-                        py-2.5
-                        text-sm
-                        transition-colors
-                        focus:outline-none
-                        ${
-                          errors.heard_from
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}
-            >
-              {errors.heard_from && (
+                w-full
+                appearance-none
+                border-2
+                rounded-xl
+                px-3
+                py-2.5
+                pr-10
+                text-sm
+                bg-white
+                transition-colors
+                focus:outline-none
+                ${
+                  errors.heard_from
+                    ? "border-red-500"
+                    : "border-slate-200 focus:border-teal-dark"
+                }
+              `}
+              >
+                <option value="">Sélectionnez une option</option>
+
+                  {referralOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+            </select>
+
+            </div>
+
+            {errors.heard_from && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.heard_from }
                 </p>
               )}
-              <option value="">Sélectionnez une option</option>
 
-              {referralOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
           </div>
+
+          
 
           {form.heard_from === 'Autre' && (
           <div className="mt-4">
@@ -521,7 +531,7 @@ export default function RegistrationModal({
               "
             />
           </div>
-        )}
+          )}
 
         <div className="flex items-start gap-3">
           <input
@@ -534,22 +544,7 @@ export default function RegistrationModal({
                 accepted_terms: e.target.checked,
               }))
             }
-            className={`
-              w-full
-              rounded-xl
-              border-2
-              px-4
-              py-3
-              bg-white
-              text-sm
-              transition-colors
-              focus:outline-none
-              ${
-                errors.heard_from
-                  ? "border-red-500"
-                  : "border-slate-200 focus:border-teal-dark"
-              }
-            `}
+            className="mt-1 h-4 w-4 accent-teal-dark shrink-0"
           />
 
           <label

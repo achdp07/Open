@@ -188,6 +188,10 @@ useEffect(() => {
   return () => clearInterval(timer);
 }, []);
 
+useEffect(() => {
+  window.scrollTo(0, 0);
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement

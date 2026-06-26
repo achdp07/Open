@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import communityImg from '../assets/images/rej.png';
+import { Link } from 'react-router-dom';
 
 const Community = () => {
   return (
@@ -34,9 +35,12 @@ const Community = () => {
               Open! rassemble étudiants, professionnels et créateurs autour du numérique,
               de l'innovation et du partage. Nous croyons que le futur se construit ensemble.
             </p>
-            <button className="bg-teal-dark text-white px-10 py-4 rounded-2xl font-bold hover:bg-teal-darker transition-all shadow-xl shadow-teal-dark/20">
-              Rejoindre Open!
-            </button>
+            <Link 
+            to="/indabax" 
+            className="bg-[#005C53] text-white px-4 py-4 rounded-2xl font-bold hover:bg-[#004C43] 
+            transition-all shadow-xl shadow-[#005C53]/20">
+              Participer à IndabaX
+            </Link>
           </motion.div>
 
         </div>

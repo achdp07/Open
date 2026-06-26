@@ -29,8 +29,8 @@ const Hero = () => {
             Une communauté qui forme les jeunes aux compétences numériques, à l'innovation et aux technologies de demain.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/join" className="bg-[#005C53] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#004C43] transition-all shadow-xl shadow-[#005C53]/20 flex items-center gap-2 group">
-              Rejoindre la communauté
+            <Link to="/indabax" className="bg-[#005C53] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#004C43] transition-all shadow-xl shadow-[#005C53]/20 flex items-center gap-2 group">
+              Particicer à IndabaX
               <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link to="/programs" className="bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-2xl font-bold hover:border-[#005C53] hover:text-[#005C53] transition-all">

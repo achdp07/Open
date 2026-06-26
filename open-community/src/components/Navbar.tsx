@@ -1,21 +1,63 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo1.png'
 import { useAuth } from '../context/AuthContext';
 import { User, Settings, LogOut, BookOpen } from 'lucide-react';
 
-const navLinks = [
-  { name: 'Accueil', href: '/' },
-  { name: 'IndabaX', href: '/indabax' },
-  { name: 'A propos', href: '#about' },
-  { name: 'Programmes', href: '#programs' },
-  { name: 'Evenements', href: '#events' },
+import RegistrationModal from './RegistrationModal';
+
+type NavLink = 
+  | { name: string; type: "page"; to: string }
+  | { name: string; type: "section"; id: string };
+
+
+
+  const navLinks: NavLink[] = [ // ✨ Added type annotation here
+  { name: "Accueil", type: "page", to: "/" },
+  { name: "IndabaX", type: "page", to: "/indabax" },
+  { name: "À propos", type: "section", id: "about" },
+  { name: "Programmes", type: "section", id: "programs" },
+  { name: "Événements", type: "section", id: "events" },
 ];
 
 
+
 const Navbar = () => {
+  const [searchParams] = useSearchParams();
+  const [showSelectedEvent, setSelectedEvent] = useState(false);
+  useEffect(() => {
+    if (searchParams.get("register") === "true") {
+      setSelectedEvent(true);
+    }
+  }, [searchParams]);
+
+  const location = useLocation();
+
+  const navigateTo = (link: NavLink) => { // ✨ Uses the new NavLink union type
+    if (link.type === "page") {
+      navigate(link.to); // TypeScript now knows 'to' is guaranteed to exist
+      return;
+    }
+  
+    // already on home
+    if (location.pathname === "/") {
+      document
+        .getElementById(link.id) // TypeScript now knows 'id' is guaranteed to exist
+        ?.scrollIntoView({
+          behavior: "smooth",
+        });
+    } else {
+      navigate(`/#${link.id}`);
+    }
+  
+    setIsOpen(false);
+  };
+
+
+
+
   const {
   user,
   appRole,
@@ -47,17 +89,17 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-slate-600 hover:text-teal-dark transition-colors"
-            >
-              {link.name}
-            </a>
+          <button
+            key={link.name}
+            onClick={() => navigateTo(link)}
+            className="text-sm font-medium text-slate-600 hover:text-teal-dark transition-colors"
+          >
+            {link.name}
+          </button>
           ))}
 
           {isAuthenticated ? (
-  <div className="relative">
+        <div className="relative">
     <button
       onClick={() => setIsProfileOpen(!isProfileOpen)}
       className="flex items-center gap-3"
@@ -133,13 +175,21 @@ const Navbar = () => {
             </div>
           ) : (
             <Link
-              to="/indabax"
+              to="/indabax?register=true"
               className="bg-teal-dark text-white px-6 py-2.5 rounded-full text-sm font-semibold"
             >
               S'inscrire
             </Link>
+            
           )}
-        </div>
+
+          <RegistrationModal
+            isOpen={showSelectedEvent}
+            onClose={() => setSelectedEvent(false)}
+            eventSlug="indabax-mr-2026"
+            eventTitle="IndabaX Mauritanie 2026"
+          />
+          </div>
 
         {/* Mobile Menu Button */}
         <button className="md:hidden text-slate-900" onClick={() => setIsOpen(!isOpen)}>
@@ -158,14 +208,13 @@ const Navbar = () => {
           >
             {navLinks.map((link) => (
               
-              <a
+              <button
               key={link.name}
-                href={link.href}
-                className="text-lg font-medium text-slate-600"
-                onClick={() => setIsOpen(false)}
+              onClick={() => navigateTo(link)}
+                className="text-lg font-medium text-slate-600 text-left"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
 
           {isAuthenticated ? (
@@ -178,11 +227,11 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link
-              to="/join"
+              to="/indabax?register=true"
               onClick={() => setIsOpen(false)}
               className="bg-teal-dark text-white px-6 py-3 rounded-xl text-center font-semibold"
             >
-              Rejoindre la communauté
+              S'inscrire à IndabaX
             </Link>
           )}
 

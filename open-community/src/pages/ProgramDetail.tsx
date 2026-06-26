@@ -146,13 +146,13 @@ export default function ProgramDetail() {
                 <p className="text-lg text-slate-600 leading-relaxed">
                   {program.objectives}
                 </p>
-                <p className="text-lg text-slate-600 leading-relaxed">
+                {/* <p className="text-lg text-slate-600 leading-relaxed">
                   {program.language}
-                </p>
+                </p> */}
 
-                <p className="text-lg text-slate-600 leading-relaxed">
+                {/* <p className="text-lg text-slate-600 leading-relaxed">
                   {program.duration_weeks} semaines
-                </p>
+                </p> */}
               </motion.div>
 
               {/* Meta cards */}
@@ -292,7 +292,7 @@ export default function ProgramDetail() {
                           <p className="text-xs text-slate-600 leading-relaxed">
                             Tu dois être connecté pour t'inscrire.{' '}
                             <Link
-                              to="/join"
+                              to="/"
                               className="text-teal-dark font-bold hover:underline"
                             >
                               Se connecter

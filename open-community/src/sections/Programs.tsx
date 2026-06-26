@@ -52,7 +52,7 @@ const Programs = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Nos programmes</h2>
-            <p className="text-slate-400 max-w-xl">
+            <p className="text-slate-200 max-w-xl">
               Des parcours intensifs et pratiques pour transformer votre passion en expertise.
             </p>
           </div>
@@ -84,10 +84,13 @@ const Programs = () => {
             {programs.slice(0, 6).map((prog, idx) => (
               <motion.div
                 key={prog.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ delay: Math.min(idx * 0.05, 0.2),
+                  ease: "linear",  
+                  duration: 0.3 }}
+                style={{ transform: "translateZ(0)", willChange: "transform, opacity" }}
                 className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all group"
               >
                 {/* Tag + Arrow */}
