@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {
   ArrowLeft,
   Calendar,
-  MapPin,
   Users,
   Brain,
   Network,
@@ -10,11 +9,10 @@ import {
   ChevronDown,
   CheckCircle,
   ChevronRight,
-  Zap,
 } from 'lucide-react';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import RegistrationModal from '../../components/RegistrationModal';
 
@@ -24,7 +22,6 @@ import logo from '../../assets/images/logo1.png';
 
 import alx from '../../assets/images/alx.png';
 import unesco from '../../assets/images/unesco.png';
-import gdc from '../../assets/images/gdc.png';
 
 import indabaxLogo from '../../assets/images/indaba.png';
 import mihLogo from '../../assets/images/2mih.png';
@@ -38,13 +35,13 @@ export default function IndabaXMauritania() {
   const [showSelectedEvent, setSelectedEvent] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   const [success, setSuccess] = useState(false);
 
   const [opened, setOpened] = useState<number | null>(0);
 
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
 
   const [form, setForm] = useState({
     first_name: '',
@@ -357,9 +354,9 @@ useEffect(() => {
 
                 <RegistrationModal
                   isOpen={showSelectedEvent}
-                  onClose={() => setSelectedEvent(null)}
-                  eventSlug={showSelectedEvent?.slug || ''}
-                  eventTitle={showSelectedEvent?.title || ''}
+                  onClose={() => setSelectedEvent(false)}
+                  eventSlug={showSelectedEvent?.eventSlug || ''}
+                  eventTitle={showSelectedEvent?.eventTitle || ''}
                 />
                   
 
