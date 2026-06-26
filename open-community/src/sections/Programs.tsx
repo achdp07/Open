@@ -91,7 +91,7 @@ const Programs = () => {
                   ease: "linear",  
                   duration: 0.3 }}
                 style={{ transform: "translateZ(0)", willChange: "transform, opacity" }}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all group"
+                className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-[transform,box-shadow] duration-300 ease-out group"
               >
                 {/* Tag + Arrow */}
                 <div className="flex justify-between items-start mb-6">

@@ -592,7 +592,7 @@ useEffect(() => {
                     p-6
                     hover:-translate-y-1
                     hover:shadow-xl
-                    transition-all
+                    transition-[transform,box-shadow] duration-300 ease-out
                     "
                     >
                       <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-dark flex items-center justify-center">
