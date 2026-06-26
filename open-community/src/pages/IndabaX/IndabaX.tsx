@@ -9,7 +9,13 @@ import {
   ChevronDown,
   CheckCircle,
   ChevronRight,
+  Link2,
 } from 'lucide-react';
+import {
+  FaFacebook,
+  FaWhatsapp,
+  FaLinkedin,
+} from "react-icons/fa";
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +39,8 @@ import { api } from '../../services/api';
 export default function IndabaXMauritania() {
   const navigate = useNavigate();
   const [showSelectedEvent, setSelectedEvent] = useState(false);
+
+  const [copied, setCopied] = useState(false);
 
   const [loading, setLoading] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
@@ -379,7 +387,7 @@ useEffect(() => {
                 <button
                   onClick={() => setSelectedEvent(true)}
                   className="bg-teal-dark text-white p-4 rounded-full font-bold text-sm flex items-center 
-                  justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-2"
+                  justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-4 "
                 >
                   Je réserve ma place
                 </button>
@@ -726,6 +734,139 @@ useEffect(() => {
                 </div>
               </div>
 
+              {/* Ressources */}
+
+              <div>
+
+              <div className="max-w-2xl mb-10">
+                <h2 className="text-3xl font-bold mb-4">
+                  Ressources
+                </h2>
+
+                <p className="text-slate-600 leading-relaxed">
+                  Préparez votre participation en consultant les documents officiels
+                  d'IndabaX Mauritanie et partagez l'événement avec votre réseau.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-5">
+
+                {[
+                  {
+                    icon: "📄",
+                    title: "Règlement du Hackathon",
+                    description: "Conditions de participation et règles officielles.",
+                    action: "Consulter",
+                    href: "/documents/reglement-hackathon.pdf",
+                  },
+                  {
+                    icon: "📘",
+                    title: "Guide du participant",
+                    description: "Toutes les informations pratiques pour les équipes.",
+                    action: "Télécharger",
+                    href: "/documents/guide-participant.pdf",
+                  },
+                  {
+                    icon: "📅",
+                    title: "Programme détaillé",
+                    description: "Version PDF du programme complet.",
+                    action: "Télécharger",
+                    href: "/documents/programme-indabax.pdf",
+                  },
+                ].map((item, index) => (
+
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: index * 0.1,
+                    }}
+                    viewport={{ once: true }}
+                    className="
+                      border
+                      border-slate-200
+                      rounded-2xl
+                      p-6
+                      hover:shadow-xl
+                      transition-all
+                      flex
+                      flex-col
+                      justify-between
+                    "
+                  >
+
+                    <div>
+
+                      <div className="text-3xl mb-4">
+                        {item.icon}
+                      </div>
+
+                      <h3 className="font-bold text-lg text-slate-900 mb-2">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {item.description}
+                      </p>
+
+                    </div>
+
+                    {item.href ? (
+
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          mt-6
+                          inline-flex
+                          items-center
+                          gap-2
+                          font-semibold
+                          text-teal-dark
+                          hover:gap-3
+                          transition-all
+                        "
+                      >
+                        {item.action}
+                        <ChevronRight size={16} />
+                      </a>
+
+                    ) : (
+
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(window.location.href);
+                          alert("Lien copié !");
+                        }}
+                        className="
+                          mt-6
+                          inline-flex
+                          items-center
+                          gap-2
+                          font-semibold
+                          text-teal-dark
+                          hover:gap-3
+                          transition-all
+                        "
+                      >
+                        {item.action}
+                        <ChevronRight size={16} />
+                      </button>
+
+                    )}
+
+                  </motion.div>
+
+                ))}
+
+              </div>
+
+              </div>
+
+
             </div>
             </motion.div>
 
@@ -832,7 +973,19 @@ useEffect(() => {
                             type="text"
                             placeholder="Nom"
                             onChange={handleChange}
-                            />
+                            className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
+                            ${
+                              errors.last_name
+                                ? "border-red-500"
+                                : "border-slate-200 focus:border-teal-dark"
+                            }
+                          `}/>
+
+                          {errors.last_name && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {errors.last_name}
+                          </p>
+                          )}
 
                         </div>
 
@@ -1071,7 +1224,38 @@ useEffect(() => {
       </main>
 
       <Footer />
+      <AnimatePresence>
+      {copied && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.25 }}
+          className="
+            fixed
+            bottom-6
+            right-6
+            z-50
+            bg-slate-900
+            text-white
+            px-5
+            py-3
+            rounded-xl
+            shadow-2xl
+            flex
+            items-center
+            gap-3
+          "
+        >
+          <CheckCircle
+            size={18}
+            className="text-lime-bright"
+          />
 
+          Lien copié dans le presse-papiers
+        </motion.div>
+      )}
+    </AnimatePresence>
     </div>
   );
 }

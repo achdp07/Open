@@ -1,9 +1,25 @@
 import { } from 'lucide-react'
-// import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo2.png';
 import { FaFacebook, FaWhatsapp, FaLinkedin } from 'react-icons/fa';
 
+
+
 const Footer = () => {
+  const navigate = useNavigate();
+const location = useLocation();
+
+const goToSection = (id: string) => {
+  if (location.pathname === '/') {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  } else {
+    navigate(`/#${id}`);
+  }
+};
+
+
   return (
     <footer className="bg-teal-dark text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6">
@@ -32,10 +48,51 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-6">Navigation</h4>
             <ul className="space-y-4 text-slate-400">
-              <li><a href="/" className="hover:text-white transition-colors">Accueil</a></li>
-              <li><a href="#about" className="hover:text-white transition-colors">A propos</a></li>
-              <li><a href="#programs" className="hover:text-white transition-colors">Programmes</a></li>
-              <li><a href="#events" className="hover:text-white transition-colors">Evenements</a></li>
+              <li>
+                <Link
+                  to="/"
+                  className="hover:text-white transition-colors"
+                >
+                  Accueil
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/indabax"
+                  className="hover:text-white transition-colors"
+                >
+                  IndabaX Mauritanie
+                </Link>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => goToSection('about')}
+                  className="hover:text-white transition-colors"
+                >
+                  À propos
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => goToSection('programs')}
+                  className="hover:text-white transition-colors"
+                >
+                  Programmes
+                </button>
+              </li>
+
+              <li>
+                <button
+                  onClick={() => goToSection('events')}
+                  className="hover:text-white transition-colors"
+                >
+                  Événements
+                </button>
+              </li>
+
             </ul>
           </div>
 
