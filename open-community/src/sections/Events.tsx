@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Calendar, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../services/api';
-import RegistrationModal from '../components/RegistrationModal';
+// import RegistrationModal from '../components/RegistrationModal';
+import HandleRegistration from '../components/HandleRegistration';
 
 interface Event {
   id: number;
@@ -14,7 +15,7 @@ interface Event {
 
 const Events = () => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [selectedEvent, setSelectedEvent] =
+  // const [selectedEvent, setSelectedEvent] =
     useState<Event | null>(null);
 
   const [isLoading, setIsLoading] =
@@ -155,10 +156,11 @@ const Events = () => {
 
                 <button
 
-                  onClick={() => {
-                    console.log(event);
-                    setSelectedEvent(event);
-                  }}
+                  onClick={HandleRegistration}
+                  // onClick={() => {
+                  //   console.log(event);
+                    // setSelectedEvent(event);
+                  // }}
 
                   className="w-full py-3 rounded-xl bg-teal-dark text-white font-bold hover:opacity-90 transition"
 
@@ -181,7 +183,7 @@ const Events = () => {
 
         {/* Modal */}
 
-        <RegistrationModal
+        {/* <RegistrationModal
 
           isOpen={!!selectedEvent}
 
@@ -197,7 +199,7 @@ const Events = () => {
             selectedEvent?.title || ''
           }
 
-        />
+        /> */}
 
       </div>
     </section>

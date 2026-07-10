@@ -1,6 +1,9 @@
 import alx from '../assets/images/alx.png';
 import unesco from '../assets/images/unesco.png';
-import gdc from '../assets/images/gdc.png';
+// import gdc from '../assets/images/gdc.png';
+import mih from '../assets/images/2mih.png';
+import indaba from '../assets/images/indaba.png';
+import tamkin from '../assets/images/tamkin.png';
 
 const Partners = () => {
   return (
@@ -14,7 +17,11 @@ const Partners = () => {
         <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 grayscale hover:grayscale-0 transition-all">
           <img src={unesco} className="h-12 object-contain" alt="UNESCO" />
           <img src={alx} className="h-12 object-contain" alt="ALX" />
-          <img src={gdc} className="h-6 object-contain" alt="GDC" />
+          {/* <img src={gdc} className="h-6 object-contain" alt="GDC" /> */}
+          <img src={mih} className="h-6 object-contain" alt="2mih" />
+          <img src={indaba} className="h-6 object-contain" alt="indaba" />
+          <img src={tamkin} className="h-6 object-contain" alt="tamkin" />
+
         </div>
 
       </div>

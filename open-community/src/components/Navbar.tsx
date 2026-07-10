@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+//useSearchParams to be added in react-router-dom
 import logo from '../assets/images/logo1.png'
 import { useAuth } from '../context/AuthContext';
 import { User, Settings, LogOut, BookOpen } from 'lucide-react';
+import HandleRegistration from './HandleRegistration';
 
-import RegistrationModal from './RegistrationModal';
+// import RegistrationModal from './RegistrationModal';
 
 type NavLink = 
   | { name: string; type: "page"; to: string }
@@ -25,13 +27,13 @@ type NavLink =
 
 
 const Navbar = () => {
-  const [searchParams] = useSearchParams();
-  const [showSelectedEvent, setSelectedEvent] = useState(false);
-  useEffect(() => {
-    if (searchParams.get("register") === "true") {
-      setSelectedEvent(true);
-    }
-  }, [searchParams]);
+  // const [searchParams] = useSearchParams();
+  // const [showSelectedEvent, setSelectedEvent] = useState(false);
+  // useEffect(() => {
+  //   if (searchParams.get("register") === "true") {
+  //     setSelectedEvent(true);
+  //   }
+  // }, [searchParams]);
 
   const location = useLocation();
 
@@ -175,20 +177,21 @@ const Navbar = () => {
             </div>
           ) : (
             <Link
+              onClick={HandleRegistration}
               to="/indabax?register=true"
-              className="bg-teal-dark text-white px-6 py-2.5 rounded-full text-sm font-semibold"
+              className="bg-teal-dark text-white px-6 py-2.5 rounded-2xl text-sm font-semibold"
             >
               S'inscrire
             </Link>
             
           )}
 
-          <RegistrationModal
+          {/* <RegistrationModal
             isOpen={showSelectedEvent}
             onClose={() => setSelectedEvent(false)}
             eventSlug="indabax-mr-2026"
             eventTitle="IndabaX Mauritanie 2026"
-          />
+          /> */}
           </div>
 
         {/* Mobile Menu Button */}
@@ -229,7 +232,7 @@ const Navbar = () => {
             <Link
               to="/indabax?register=true"
               onClick={() => setIsOpen(false)}
-              className="bg-teal-dark text-white px-6 py-3 rounded-full text-center font-semibold"
+              className="bg-teal-dark text-white px-6 py-3 rounded-2xl text-center font-semibold"
             >
               S'inscrire à IndabaX
             </Link>

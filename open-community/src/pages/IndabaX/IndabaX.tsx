@@ -11,18 +11,20 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-import RegistrationModal from '../../components/RegistrationModal';
+//import RegistrationModal from '../../components/RegistrationModal';
+import HandleRegistration from '../../components/HandleRegistration';
 
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import logo from '../../assets/images/logo1.png';
 
-import alx from '../../assets/images/alx.png';
-import unesco from '../../assets/images/unesco.png';
-
+// import alx from '../../assets/images/alx.png';
+// import unesco from '../../assets/images/unesco.png';
+import tamkin from '../../assets/images/tamkin.png';
 import indabaxLogo from '../../assets/images/indaba.png';
 import mihLogo from '../../assets/images/2mih.png';
 import bann from '../../assets/images/bann.jpg';
@@ -32,7 +34,7 @@ import { api } from '../../services/api';
 
 export default function IndabaXMauritania() {
   const navigate = useNavigate();
-  const [showSelectedEvent, setSelectedEvent] = useState(false);
+  //const [showSelectedEvent, setSelectedEvent] = useState(false);
 
   const [loading, setLoading] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
@@ -64,24 +66,24 @@ export default function IndabaXMauritania() {
     {
       logo: logo,
       name: "Open Community",
-      className: "h-10",
+      className: "h-8",
     },
     {
       logo: mihLogo,
       name: "2MIH",
-      className: "h-16",
+      className: "h-8",
     },
     {
       logo: indabaxLogo,
       name: "IndabaX",
-      className: "h-14",
+      className: "h-7",
     },
   ];
 
   const agenda = [
     {
       day: 'Jour 1',
-      date: 'Vendredi 24 juillet',
+      date: 'Vendredi 31 juillet',
       items: [
         {
           time: '08h00 – 09h00',
@@ -116,7 +118,7 @@ export default function IndabaXMauritania() {
   
     {
       day: 'Jour 2',
-      date: 'Samedi 25 juillet',
+      date: 'Samedi 1 août',
       items: [
         {
           time: '08h00 – 12h00',
@@ -135,7 +137,7 @@ export default function IndabaXMauritania() {
   
     {
       day: 'Jour 3',
-      date: 'Dimanche 26 juillet',
+      date: 'Dimanche 2 août',
       items: [
         {
           time: '16h00 – 18h00',
@@ -149,7 +151,7 @@ export default function IndabaXMauritania() {
     },
   ];
 
-const eventDate = new Date("2026-07-24T08:00:00");
+const eventDate = new Date("2026-07-31T08:00:00");
 
 const [timeLeft, setTimeLeft] = useState({
   days: 0,
@@ -377,22 +379,14 @@ useEffect(() => {
                 </p>
                 
                 <button
-                  onClick={() => setSelectedEvent(true)}
-                  className="bg-teal-dark text-white p-4 rounded-full font-bold text-sm flex items-center 
+                  onClick={HandleRegistration}
+                  // onClick={() => setSelectedEvent(true)}
+                  className="bg-teal-dark text-white p-4 rounded-2xl font-bold text-sm flex items-center 
                   justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-4 "
                 >
                   Je réserve ma place
                 </button>
                 
-                <RegistrationModal
-                  isOpen={showSelectedEvent}
-                  onClose={() => setSelectedEvent(false)}
-                  eventSlug="indabax-mr-2026"
-                  eventTitle="IndabaX Mauritanie 2026"
-                />
-                
-                  
-
               </div>
 
               {/* Meta */}
@@ -501,15 +495,11 @@ useEffect(() => {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                     {[
                       {
-                        logo: unesco,
-                        name: "UNESCO",
+                        logo: tamkin,
+                        name: "tamkin",
                         className: "h-10",
                       },
-                      {
-                        logo: alx,
-                        name: "ALX",
-                        className: "h-10",
-                      },
+                      
           
                     ].map((partner, idx) => (
                       <motion.div
@@ -532,7 +522,7 @@ useEffect(() => {
                         <img
                           src={partner.logo}
                           alt={partner.name}
-                          className={`${partner.className} object-contain grayscale hover:grayscale-0 transition-all duration-300`}
+                          className={`${partner.className} object-contain hover:grayscale-0 transition-all duration-300`}
                         />
                       </motion.div>
                     ))}
@@ -749,21 +739,21 @@ useEffect(() => {
                     title: "Règlement du Hackathon",
                     description: "Conditions de participation et règles officielles.",
                     action: "Consulter",
-                    href: "/documents/reglement-hackathon.pdf",
+                    href: "",
                   },
-                  {
-                    icon: "📘",
-                    title: "Guide du participant",
-                    description: "Toutes les informations pratiques pour les équipes.",
-                    action: "Télécharger",
-                    href: "/documents/guide-participant.pdf",
-                  },
+                  // {
+                  //   icon: "📘",
+                  //   title: "Guide du participant",
+                  //   description: "Toutes les informations pratiques pour les équipes.",
+                  //   action: "Télécharger",
+                  //   href: "",
+                  // },
                   {
                     icon: "📅",
                     title: "Programme détaillé",
                     description: "Version PDF du programme complet.",
                     action: "Télécharger",
-                    href: "/documents/programme-indabax.pdf",
+                    href: "",
                   },
                 ].map((item, index) => (
 
@@ -831,7 +821,7 @@ useEffect(() => {
                       <button
                         onClick={() => {
                           navigator.clipboard.writeText(window.location.href);
-                          alert("Lien copié !");
+                          alert("Document bientôt disponible !");
                         }}
                         className="
                           mt-6
@@ -1086,15 +1076,12 @@ useEffect(() => {
                           type="text"
                           placeholder="Étudiant, Ingénieur..."
                           onChange={handleChange}
-                          className={`
-                        border-2
-                        rounded-xl
-                        px-3
-                        py-2.5
-                        text-sm
-                        transition-colors
-                        focus:outline-none
-                        
+                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
+                          ${
+                          errors.profession
+                            ? "border-red-500"
+                            : "border-slate-200 focus:border-teal-dark"
+                        }
                       `}
                         />
                       {errors.profession && (
@@ -1185,8 +1172,9 @@ useEffect(() => {
                       </div>
 
                       <button
-                        type="submit"
-                        disabled={loading}
+                        onClick={HandleRegistration}
+                        // type="submit"
+                        // disabled={loading}
                         className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-2"
                       >
 

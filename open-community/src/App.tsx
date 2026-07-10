@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // import ScrollToTop from './components/ScrollToTop';
 // import { AnimatePresence } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 
 import RoleGuard from './guards/RoleGuard';
 
@@ -54,7 +55,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-
+      <Toaster />
       <Routes>
         {/* Public */}
         <Route path="/" element={<Home />} />
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/programs/:id" element={<ProgramDetail />} />
         <Route path="/indabax" element={<IndabaXMauritania />} />
+        
         
 
         {/* Member */}
