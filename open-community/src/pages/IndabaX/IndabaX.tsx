@@ -25,6 +25,8 @@ import logo from '../../assets/images/logo1.png';
 // import alx from '../../assets/images/alx.png';
 // import unesco from '../../assets/images/unesco.png';
 import tamkin from '../../assets/images/tamkin.png';
+import pafiid from '../../assets/images/pafiid.jpg';
+import mr from '../../assets/images/mr.png';
 import indabaxLogo from '../../assets/images/indaba.png';
 import mihLogo from '../../assets/images/2mih.png';
 import bann from '../../assets/images/bann.jpg';
@@ -448,7 +450,7 @@ useEffect(() => {
                 {/* Organisateurs */}
                 <div className="relative overflow-hidden py-2">
 
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 mb-2">
+                <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 mb-6">
                   Organisateurs
                 </p>
 
@@ -494,12 +496,22 @@ useEffect(() => {
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                     {[
+{
+                        logo: mr,
+                        name: "mr",
+                        className: "h-10",
+                      },
+
                       {
                         logo: tamkin,
                         name: "tamkin",
                         className: "h-10",
                       },
-                      
+                      {
+                        logo: pafiid,
+                        name: "pafiid",
+                        className: "h-11",
+                      },
           
                     ].map((partner, idx) => (
                       <motion.div
