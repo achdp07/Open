@@ -772,7 +772,7 @@ useEffect(() => {
                       rounded-2xl
                       p-6
                       hover:shadow-xl
-                      transition-all
+          
                       flex
                       flex-col
                       justify-between

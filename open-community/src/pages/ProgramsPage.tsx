@@ -104,7 +104,7 @@ export default function ProgramsPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.2 }}
-                    className="bg-white border border-slate-100 rounded-3xl p-8 hover:shadow-xl transition-all group"
+                    className="bg-white border border-slate-100 rounded-3xl p-8 hover:shadow-xl group"
                   >
                     {/* Tag + Arrow */}
                     <div className="flex justify-between items-start mb-6">
