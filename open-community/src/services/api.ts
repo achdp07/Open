@@ -156,22 +156,29 @@ export const api = {
     return data;
   },
   
-  registerPublicEvent: async (data: any) => {
-    const res = await fetch(
-      `${BASE_URL}/api/events/register/`,
-      {
-        method: 'POST',
-  
+registerPublicEvent: async (data: any) => {
+    console.log("Sending:", data);
+
+    const res = await fetch(`${BASE_URL}/api/events/register/`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
-  
         body: JSON.stringify(data),
-      }
-    );
-  
-    return handleResponse(res);
-  },
+    });
+
+    console.log("Status:", res.status);
+
+    const body = await res.text();
+
+    console.log("Response:", body);
+
+    if (!res.ok) {
+        throw new Error(body);
+    }
+
+    return JSON.parse(body);
+},
 
   // ─── ASSESSMENTS ────────────────────────────────────
 

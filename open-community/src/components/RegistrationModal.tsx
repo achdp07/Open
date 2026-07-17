@@ -54,13 +54,10 @@ export default function RegistrationModal({
     last_name: '',
     email: '',
     phone: '',
-    city: '',
     profession: '',
     domaine:'',
     domaine_other:'',
-    motivation: '',
     source: '',
-    prof: '',
     prof_other: '',
     heard_from: '',
     heard_from_other: '',
@@ -116,8 +113,8 @@ export default function RegistrationModal({
     if (!form.domaine)
       newErrors.domaine = "Veuillez indiquer votre domaine.";
 
-    if (!form.prof)
-      newErrors.prof = "Veuillez sélectionner une option.";
+    if (!form.profession)
+      newErrors.profession = "Veuillez sélectionner une option.";
 
     if (!form.accepted_terms)
       newErrors.accepted_terms =
@@ -154,7 +151,7 @@ export default function RegistrationModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/10 backdrop-blur-sm flex justify-center items-center p-4"
+      className="fixed inset-0 z-50 bg-black/5 backdrop-blur-sm flex justify-center items-center p-4"
       onClick={onClose}
     >
 
@@ -207,7 +204,7 @@ export default function RegistrationModal({
 
               <label className="text-xs font-semibold text-slate-600">
 
-                Prénom
+                Prénom | الاسم الأول
 
               </label>
 
@@ -243,7 +240,7 @@ export default function RegistrationModal({
 
               <label className="text-xs font-semibold text-slate-600">
 
-                Nom
+                Nom | اسم العائلة
 
               </label>
 
@@ -285,7 +282,7 @@ export default function RegistrationModal({
 
             <label className="text-xs font-semibold text-slate-600">
 
-              Email
+              Email | البريد الإلكتروني
 
             </label>
 
@@ -325,7 +322,7 @@ export default function RegistrationModal({
 
             <label className="text-xs font-semibold text-slate-600">
 
-              WhatsApp
+              WhatsApp | رقم الواتساب
 
             </label>
 
@@ -361,12 +358,12 @@ export default function RegistrationModal({
           {/* Profession */}
           <div>
             <label className="text-xs font-semibold text-slate-600">
-              Profession
+              Profession | المهنة
             </label>
             <div className="relative">
               <select
-                name="prof"
-                value={form.prof}
+                name="profession"
+                value={form.profession}
                 onChange={handleChange}
                 className={`
                   w-full
@@ -381,7 +378,7 @@ export default function RegistrationModal({
                   transition-colors
                   focus:outline-none
                   ${
-                    errors.prof
+                    errors.profession
                       ? "border-red-500"
                       : "border-slate-200 focus:border-teal-dark"
                   }
@@ -406,12 +403,8 @@ export default function RegistrationModal({
           </div>
           
 
-          {form.prof === 'Autre' && (
-          <div className="mt-4">
-            <label className="text-xs font-semibold text-slate-600">
-              Précisez
-            </label>
-
+          {form.profession === 'Autre' && (
+          <div className="flex flex-col gap-1.5">
             <input
               type="text"
               name="prof_other"
@@ -420,14 +413,17 @@ export default function RegistrationModal({
               placeholder="Précisez..."
               className="
                 w-full
-                rounded-2xl
-                border-2
-                border-slate-200
+                text-sm
+                text-slate-800
+                placeholder-slate-400
+                rounded-xl
+                border
+                border-slate-300/70
+                shadow-sm
                 px-4
-                py-4
-                focus:outline-none
-                focus:ring-2
-                focus:ring-teal-dark
+                py-2.5
+                  transition-colors
+                  focus:outline-none
               "
             />
           </div>
@@ -438,7 +434,7 @@ export default function RegistrationModal({
           {/* Domaine d'Expertise */}
           <div>
             <label className="text-xs font-semibold text-slate-600">
-              Domaine d'expertise 
+              Domaine d'expertise | مجال الخبرة
             </label>
             <div className="relative">
               <select
@@ -483,39 +479,11 @@ export default function RegistrationModal({
             </div>
           
 
-          {form.prof === 'Autre' && (
-          <div className="mt-4">
-            <label className="text-xs font-semibold text-slate-600">
-              Précisez
-            </label>
-
-            <input
-              type="text"
-              name="domaine_other"
-              value={form.domaine_other}
-              onChange={handleChange}
-              placeholder="Précisez..."
-              className="
-                w-full
-                rounded-2xl
-                border-2
-                border-slate-200
-                px-4
-                py-4
-                focus:outline-none
-                focus:ring-2
-                focus:ring-teal-dark
-              "
-            />
-          </div>
-          )}
-          
-
           {/* Source */}
 
           <div>
             <label className="text-xs font-semibold text-slate-600">
-              Comment avez-vous entendu parler de nous ?
+              Comment avez-vous entendu parler de nous ? | كيف سمعت عنا؟
             </label>
           <div className="relative">
             <select
@@ -617,8 +585,6 @@ export default function RegistrationModal({
           </button>
 
         </form>
-
-
 
         )}
         

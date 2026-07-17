@@ -7,7 +7,6 @@ import {
   Network,
   Lightbulb,
   ChevronDown,
-  CheckCircle,
   ChevronRight,
   Wallet,
   Landmark,
@@ -40,21 +39,21 @@ import mihLogo from '../../assets/images/2mih.png';
 import bann from '../../assets/images/bann.webp';
 
 
-import { api } from '../../services/api';
+//import { api } from '../../services/api';
 
 export default function IndabaXMauritania() {
   const navigate = useNavigate();
   const [showSelectedEvent, setSelectedEvent] = useState(false);
 
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
 
-  const [success, setSuccess] = useState(false);
+  //const [success, setSuccess] = useState(false);
 
   const [opened, setOpened] = useState<number | null>(0);
 
   // For form validation errors (an object)
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  //const [errors, setErrors] = useState<Record<string, string>>({});
 
   const dataThemes = [
   {
@@ -136,20 +135,7 @@ export default function IndabaXMauritania() {
 ];
 
 
-  const [form, setForm] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone: '',
-    city: '',
-    profession: '',
-    organization: '',
-    motivation: '',
-    source: '',
-    heard_from: '',
-    heard_from_other: '',
-    accepted_terms: false,
-  });
+
 
   const organizers = [
     {
@@ -303,70 +289,9 @@ useEffect(() => {
   window.scrollTo(0, 0);
   }, []);
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.target;
 
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
-    e.preventDefault();
 
-    const newErrors: Record<string, string> = {};
-
-    if (!form.first_name.trim())
-      newErrors.first_name = "Le prénom est obligatoire.";
-
-    if (!form.last_name.trim())
-      newErrors.last_name = "Le nom est obligatoire.";
-
-    if (!form.email.trim())
-      newErrors.email = "L'email est obligatoire.";
-
-    if (!form.phone.trim())
-      newErrors.phone = "Le numéro WhatsApp est obligatoire.";
-
-    if (!form.city.trim())
-      newErrors.city = "La ville est obligatoire.";
-
-    if (!form.profession.trim())
-      newErrors.profession = "La profession est obligatoire.";
-
-    if (!form.motivation.trim())
-      newErrors.motivation = "La motivation est obligatoire.";
-
-    if (!form.heard_from)
-      newErrors.heard_from = "Veuillez sélectionner une option.";
-
-    if (!form.accepted_terms)
-      newErrors.accepted_terms =
-        "Vous devez accepter les conditions.";
-
-    setLoading(true);
-
-      try {
-        await api.registerPublicEvent({
-          event_slug: 'indabax-mr-2026',
-  
-          ...form,
-        });
-  
-        setSuccess(true);
-  
-        } catch (err: any) {
-          setErrors(err.message);
-        }
-        setLoading(false);
-  }; 
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -387,7 +312,7 @@ useEffect(() => {
 
           </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-12">
           
 
             {/* LEFT */}
@@ -503,7 +428,7 @@ useEffect(() => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: .6 }}
-                  className="max-w-3xl mx-auto"
+                  className="w-full mx-auto"
                 >
 
                   <h2 className="text-3xl font-bold mb-6">
@@ -517,7 +442,7 @@ useEffect(() => {
                   </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
                   {dataThemes.map((theme, index) => {
                     const Icon = theme.icon;
 
@@ -584,13 +509,13 @@ useEffect(() => {
                   Organisateurs
                 </p>
 
-                <p className="text-slate-600 mb-6 max-w-2xl leading-relaxed">
+                <p className=" text-slate-600 mb-6 w-full leading-relaxed">
                   IndabaX Mauritanie 2026 est co-organisé par Open Community et
                   2MIH, avec le soutien de partenaires engagés pour le développement de l'IA, de
                   la Data et de l'innovation en Mauritanie.
                 </p>
                   <motion.div
-                    className="flex gap-12 w-max"
+                    className="flex gap-12 w-full"
                     animate={{
                       x: ["0%", "-50%"],
                     }}
@@ -606,7 +531,7 @@ useEffect(() => {
                     {[...organizers, ...organizers].map((partner, idx) => (
                       <div
                         key={idx}
-                        className="flex items-center justify-center shrink-0 px-12 mb-6"
+                        className="flex items-center justify-center shrink-0 px-10 mb-6"
                       >
                         <img
                           src={partner.logo}
@@ -624,7 +549,7 @@ useEffect(() => {
                     Avec le soutien de
                   </p>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-5">
                     {[
 {
                         logo: mr,
@@ -1011,346 +936,10 @@ useEffect(() => {
 
             <div className="lg:col-span-1">
 
-            <div className="lg:sticky lg:top-28">
-
-              <div className="bg-white border border-slate-100 rounded-3xl shadow-xl p-8">
-
-                {success ? (
-
-                  <div className="flex flex-col items-center text-center gap-4 py-8">
-
-                    <CheckCircle
-                      size={36}
-                      className="text-lime-bright"
-                    />
-
-                    <h3 className="text-2xl font-bold">
-
-                      Inscription confirmée
-
-                    </h3>
-
-                    <p className="text-slate-500">
-
-                      Merci pour votre inscription.
-
-                    </p>
-
-                  </div>
-
-                ) : (
-
-                  <>
-                    <div className="mb-6">
-
-                      <h3 className="text-xl font-bold text-slate-900 mb-1">
-
-                        Réserver ma place
-
-                      </h3>
-
-                      <p className="text-sm text-slate-500">
-
-                        Inscrivez-vous gratuitement.
-
-                      </p>
-
-                    </div>
-
-                    <form
-                      onSubmit={handleSubmit}
-                      className="flex flex-col gap-4"
-                    >
-
-                      {/* Nom */}
-
-                      <div className="grid grid-cols-2 gap-3">
-
-                        <div className="flex flex-col gap-1.5">
-
-                          <label className="text-xs font-semibold text-slate-600">
-
-                            Prénom
-
-                          </label>
-
-                          <input
-                            required
-                            name="first_name"
-                            type="text"
-                            placeholder="Prénom"
-                            onChange={handleChange}
-                            className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
-                        ${
-                          errors.first_name
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}/>
-
-                        {errors.first_name && (
-                          <p className="text-red-500 text-xs mt-1">
-                            {errors.first_name}
-                          </p>
-                          )}
-
-                        </div>
-
-                        <div className="flex flex-col gap-1.5">
-
-                          <label className="text-xs font-semibold text-slate-600">
-
-                            Nom
-
-                          </label>
-
-                          <input
-                            required
-                            name="last_name"
-                            type="text"
-                            placeholder="Nom"
-                            onChange={handleChange}
-                            className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
-                            ${
-                              errors.last_name
-                                ? "border-red-500"
-                                : "border-slate-200 focus:border-teal-dark"
-                            }
-                          `}/>
-
-                          {errors.last_name && (
-                          <p className="text-red-500 text-xs mt-1">
-                            {errors.last_name}
-                          </p>
-                          )}
-
-                        </div>
-
-                      </div>
-
-                      {/* Email */}
-
-                      <div className="flex flex-col gap-1.5">
-
-                        <label className="text-xs font-semibold text-slate-600">
-
-                          Email
-
-                        </label>
-
-                        <input
-                          required
-                          name="email"
-                          type="email"
-                          placeholder="ton@email.com"
-                          onChange={handleChange}
-                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
-                        ${
-                          errors.email
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}
-                          
-                        />
-                      {errors.email && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {errors.email}
-                        </p>
-                      )}
-                      </div>
-
-                      {/* WhatsApp */}
-
-                      <div className="flex flex-col gap-1.5">
-
-                        <label className="text-xs font-semibold text-slate-600">
-
-                          WhatsApp
-
-                        </label>
-
-                        <input
-                          required
-                          name="phone"
-                          type="tel"
-                          placeholder="+222 xx xx xx xx"
-                          onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
-                        />
-
-
-                      </div>
-
-                      {/* Ville */}
-
-                      <div className="flex flex-col gap-1.5">
-
-                        <label className="text-xs font-semibold text-slate-600">
-
-                          Ville
-
-                        </label>
-
-                        <input
-                          required
-                          name="city"
-                          type="text"
-                          placeholder="Nouakchott"
-                          onChange={handleChange}
-                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
-                        ${
-                          errors.city
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}
-                          
-                          />
-                        {errors.city && (
-                          <p className="text-red-500 text-xs mt-1">
-                            {errors.city}
-                          </p>
-                        )}
-
-                      </div>
-
-                      {/* Profession */}
-
-                      <div className="flex flex-col gap-1.5">
-
-                        <label className="text-xs font-semibold text-slate-600">
-
-                          Profession
-
-                        </label>
-
-                        <input
-                          required
-                          name="profession"
-                          type="text"
-                          placeholder="Étudiant, Ingénieur..."
-                          onChange={handleChange}
-                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
-                          ${
-                          errors.profession
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}
-                        />
-                      {errors.profession && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {errors.profession}
-                        </p>
-                      )}
-                      </div>
-
-                      {/* Organisation */}
-
-                      <div className="flex flex-col gap-1.5">
-
-                        <label className="text-xs font-semibold text-slate-600">
-
-                          Organisation
-
-                        </label>
-
-                        <input
-                          name="organization"
-                          type="text"
-                          placeholder="Université, entreprise..."
-                          onChange={handleChange}
-                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
-                        ${
-                          errors.organization
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}/>
-                        {errors.organization && (
-                          <p className="text-red-500 text-xs mt-1">
-                            {errors.organization}
-                          </p>
-                        )}
-                      </div>
-
-                      {/* Motivation */}
-
-                      <div className="flex flex-col gap-1.5">
-
-                        <label className="text-xs font-semibold text-slate-600">
-
-                          Motivation
-
-                        </label>
-
-                        <textarea
-                          required
-                          name="motivation"
-                          rows={3}
-                          placeholder="Pourquoi souhaitez-vous participer ?"
-                          onChange={handleChange}
-                          className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm resize-none focus:outline-none focus:border-teal-dark transition-colors"
-                        />
-
-                      </div>
-
-                      {/* Source */}
-
-                      <div className="flex flex-col gap-1.5">
-
-                        <label className="text-xs font-semibold text-slate-600">
-
-                          Comment avez-vous entendu parler de nous ?
-
-                        </label>
-
-                        <input
-                          name="source"
-                          type="text"
-                          placeholder="Facebook, LinkedIn..."
-                          onChange={handleChange}
-                          className={`border-2 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none
-                        ${
-                          errors.source
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}
-                        />
-                      {errors.source && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {errors.source}
-                        </p>
-                      )}
-                      </div>
-
-                      <button
-                        //onClick={RegistrationModal}
-                        type="submit"
-                        disabled={loading}
-                        className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-2"
-                      >
-
-                        {loading
-                          ? 'Inscription...'
-                          : 'Confirmer mon inscription'}
-
-                        {!loading && (
-                          <ChevronRight size={16} />
-                        )}
-
-                      </button>
-
-                    </form>
-                  </>
-                )}
-
+              <div className="lg:sticky lg:top-28">
+                
               </div>
-
-            </div>
-
+                
             </div>
 
           </div>
