@@ -6,9 +6,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo1.webp'
 import { useAuth } from '../context/AuthContext';
 import { User, Settings, LogOut, BookOpen } from 'lucide-react';
-import HandleRegistration from './HandleRegistration';
+//import HandleRegistration from './HandleRegistration';
 
-// import RegistrationModal from './RegistrationModal';
+import RegistrationModal from './RegistrationModal';
 
 type NavLink = 
   | { name: string; type: "page"; to: string }
@@ -28,7 +28,7 @@ type NavLink =
 
 const Navbar = () => {
   // const [searchParams] = useSearchParams();
-  // const [showSelectedEvent, setSelectedEvent] = useState(false);
+   const [showSelectedEvent, setSelectedEvent] = useState(false);
   // useEffect(() => {
   //   if (searchParams.get("register") === "true") {
   //     setSelectedEvent(true);
@@ -98,6 +98,9 @@ const Navbar = () => {
           >
             {link.name}
           </button>
+
+            
+
           ))}
 
           {isAuthenticated ? (
@@ -176,22 +179,21 @@ const Navbar = () => {
           </AnimatePresence>
             </div>
           ) : (
-            <Link
-              onClick={HandleRegistration}
-              to="/indabax?register=true"
+            <button
+              onClick={() => setSelectedEvent(true)}
               className="bg-teal-dark text-white px-6 py-2.5 rounded-2xl text-sm font-semibold"
             >
               S'inscrire
-            </Link>
+            </button>
             
           )}
 
-          {/* <RegistrationModal
+          <RegistrationModal
             isOpen={showSelectedEvent}
             onClose={() => setSelectedEvent(false)}
             eventSlug="indabax-mr-2026"
             eventTitle="IndabaX Mauritanie 2026"
-          /> */}
+          />
           </div>
 
         {/* Mobile Menu Button */}

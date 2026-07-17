@@ -49,6 +49,14 @@ export default function RegistrationModal({
     'Gestion de projet',
   ]
 
+  const Thematique = [
+      "Accès au financement & Inclusion financière",
+      "Crédits bancaires par secteur d'activité",
+      "Comptes nationaux & Indicateurs macroéconomiques",
+      "Production minière nationale",
+      "Démographie & Population",
+      "Énergie & Hydrocarbures"
+  ]
   const [form, setForm] = useState({
     first_name: '',
     last_name: '',
@@ -57,6 +65,7 @@ export default function RegistrationModal({
     profession: '',
     domaine:'',
     domaine_other:'',
+    thematique: '',
     source: '',
     prof_other: '',
     heard_from: '',
@@ -478,6 +487,52 @@ export default function RegistrationModal({
 
             </div>
           
+          {/* Thematique */}
+          <div>
+            <label className="text-xs font-semibold text-slate-600">
+              Thématique  | موضوع
+            </label>
+            <div className="relative">
+              <select
+                name="thematique"
+                value={form.thematique}
+                onChange={handleChange}
+                className={`
+                  w-full
+                  appearance-none
+                  border-2
+                  rounded-xl
+                  px-3
+                  py-2.5
+                  pr-10
+                  text-sm
+                  bg-white
+                  transition-colors
+                  focus:outline-none
+                  ${
+                    errors.thematique
+                      ? "border-red-500"
+                      : "border-slate-200 focus:border-teal-dark"
+                  }
+                `}
+                >
+                <option value="">Sélectionnez une option</option>
+
+                  {Thematique.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            {errors.thematique && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.thematique}
+                </p>
+              )}
+
+          </div>
 
           {/* Source */}
 

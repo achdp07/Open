@@ -411,7 +411,7 @@ useEffect(() => {
                   rounded-2xl font-bold text-sm flex items-center justify-center 
                   gap-2 hover:opacity-90 transition-all disabled:opacity-50"
                 >
-                  Je réserve ma place
+                  Je m'inscris
                 </button>
                 <RegistrationModal
                   isOpen={showSelectedEvent}
