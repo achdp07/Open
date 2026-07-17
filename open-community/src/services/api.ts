@@ -157,8 +157,6 @@ export const api = {
   },
   
 registerPublicEvent: async (data: any) => {
-    console.log("Sending:", data);
-
     const res = await fetch(`${BASE_URL}/api/events/register/`, {
         method: "POST",
         headers: {
@@ -167,11 +165,7 @@ registerPublicEvent: async (data: any) => {
         body: JSON.stringify(data),
     });
 
-    console.log("Status:", res.status);
-
     const body = await res.text();
-
-    console.log("Response:", body);
 
     if (!res.ok) {
         throw new Error(body);
