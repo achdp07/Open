@@ -10,7 +10,7 @@ import {
   LogOut,
   PanelLeft,
 } from 'lucide-react';
-import logo from '../assets/images/logo1.png';
+import logo from '../assets/images/logo1.webp';
 
 const navLinks = [
   {

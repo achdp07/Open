@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import communityImg from '../assets/images/rej.png';
+import communityImg from '../assets/images/rej.webp';
 import { Link } from 'react-router-dom';
 
 const Community = () => {

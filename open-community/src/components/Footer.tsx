@@ -1,6 +1,6 @@
 import { } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import logo from '../assets/images/logo2.png';
+import logo from '../assets/images/logo2.webp';
 import { FaFacebook, FaWhatsapp, FaLinkedin } from 'react-icons/fa';
 
 

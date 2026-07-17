@@ -1,5 +1,5 @@
 import { ChevronRight } from 'lucide-react';
-import heroImage from '../assets/images/hero.png';
+import heroImage from '../assets/images/hero.webp';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 

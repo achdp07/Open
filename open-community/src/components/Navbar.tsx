@@ -3,7 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 //useSearchParams to be added in react-router-dom
-import logo from '../assets/images/logo1.png'
+import logo from '../assets/images/logo1.webp'
 import { useAuth } from '../context/AuthContext';
 import { User, Settings, LogOut, BookOpen } from 'lucide-react';
 import HandleRegistration from './HandleRegistration';

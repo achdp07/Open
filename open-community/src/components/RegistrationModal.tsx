@@ -22,17 +22,32 @@ export default function RegistrationModal({
 
   const referralOptions = [
     'Facebook',
-    'Instagram',
     'LinkedIn',
     'WhatsApp',
-    'Telegram',
     'Site web Open Community',
     'Université / École',
-    'Un ami ou une connaissance',
-    'Événement Open Community',
+    '2mih',
     'Organisation partenaire',
     'Autre',
   ];
+
+  const Profession = [
+    'Étudiant(e)',
+    'Développeur(se) / Ingénieur(e) logiciel',
+    'Data Scientist / Analyste de données',
+    'Professionnel(le) du secteur financier / économique',
+    'Entrepreneur(e) / Porteur(se) de projet',
+    'Autre',
+  ]
+
+  const Domaine = [
+    'Machine Learning / IA',
+    'Visualisation de données',
+    'Analyse de données ',
+    'Développement Web',
+    'Design UI / UX',
+    'Gestion de projet',
+  ]
 
   const [form, setForm] = useState({
     first_name: '',
@@ -41,9 +56,12 @@ export default function RegistrationModal({
     phone: '',
     city: '',
     profession: '',
-    organization: '',
+    domaine:'',
+    domaine_other:'',
     motivation: '',
     source: '',
+    prof: '',
+    prof_other: '',
     heard_from: '',
     heard_from_other: '',
     accepted_terms: false,
@@ -89,17 +107,17 @@ export default function RegistrationModal({
     if (!form.phone.trim())
       newErrors.phone = "Le numéro WhatsApp est obligatoire.";
 
-    if (!form.city.trim())
-      newErrors.city = "La ville est obligatoire.";
-
     if (!form.profession.trim())
-      newErrors.profession = "La profession est obligatoire.";
-
-    if (!form.motivation.trim())
-      newErrors.motivation = "La motivation est obligatoire.";
+      newErrors.profession = "Veuillez indiquer votre profession.";
 
     if (!form.heard_from)
       newErrors.heard_from = "Veuillez sélectionner une option.";
+
+    if (!form.domaine)
+      newErrors.domaine = "Veuillez indiquer votre domaine.";
+
+    if (!form.prof)
+      newErrors.prof = "Veuillez sélectionner une option.";
 
     if (!form.accepted_terms)
       newErrors.accepted_terms =
@@ -136,7 +154,7 @@ export default function RegistrationModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-center items-center p-4"
+      className="fixed inset-0 z-50 bg-black/10 backdrop-blur-sm flex justify-center items-center p-4"
       onClick={onClose}
     >
 
@@ -194,10 +212,10 @@ export default function RegistrationModal({
               </label>
 
               <input
-                required
                 name="first_name"
                 type="text"
                 placeholder="Prénom"
+                value={form.first_name}
                 onChange={handleChange}
                 className={`
                         border-2
@@ -230,10 +248,11 @@ export default function RegistrationModal({
               </label>
 
               <input
-                required
+
                 name="last_name"
                 type="text"
                 placeholder="Nom"
+                value={form.last_name}
                 onChange={handleChange}
                 className={`
                         border-2
@@ -271,10 +290,11 @@ export default function RegistrationModal({
             </label>
 
             <input
-              required
+              
               name="email"
               type="email"
               placeholder="ton@email.com"
+              value={form.email}
               onChange={handleChange}
               className={`
                         border-2
@@ -310,10 +330,11 @@ export default function RegistrationModal({
             </label>
 
             <input
-              required
+              
               name="phone"
               type="tel"
               placeholder="+222 xx xx xx xx"
+              value={form.phone}
               onChange={handleChange}
               className={`
                         border-2
@@ -337,128 +358,163 @@ export default function RegistrationModal({
               )}
           </div>
 
-          {/* Ville */}
-
-          <div className="flex flex-col gap-1.5">
-
-            <label className="text-xs font-semibold text-slate-600">
-
-              Ville
-
-            </label>
-
-            <input
-              required
-              name="city"
-              type="text"
-              placeholder="Nouakchott"
-              onChange={handleChange}
-              className={`
-                        border-2
-                        rounded-xl
-                        px-3
-                        py-2.5
-                        text-sm
-                        transition-colors
-                        focus:outline-none
-                        ${
-                          errors.first_name
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}
-            />
-            {errors.city && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.city}
-                </p>
-              )}
-          </div>
-
           {/* Profession */}
-
-          <div className="flex flex-col gap-1.5">
-
+          <div>
             <label className="text-xs font-semibold text-slate-600">
-
               Profession
-
             </label>
+            <div className="relative">
+              <select
+                name="prof"
+                value={form.prof}
+                onChange={handleChange}
+                className={`
+                  w-full
+                  appearance-none
+                  border-2
+                  rounded-xl
+                  px-3
+                  py-2.5
+                  pr-10
+                  text-sm
+                  bg-white
+                  transition-colors
+                  focus:outline-none
+                  ${
+                    errors.prof
+                      ? "border-red-500"
+                      : "border-slate-200 focus:border-teal-dark"
+                  }
+                `}
+                >
+                <option value="">Sélectionnez une option</option>
 
-            <input
-              required
-              name="profession"
-              type="text"
-              placeholder="Étudiant, Ingénieur..."
-              onChange={handleChange}
-              className={`
-                        border-2
-                        rounded-xl
-                        px-3
-                        py-2.5
-                        text-sm
-                        transition-colors
-                        focus:outline-none
-                        ${
-                          errors.profession
-                            ? "border-red-500"
-                            : "border-slate-200 focus:border-teal-dark"
-                        }
-                      `}
-            />
-            {errors.profession && (
+                  {Profession.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            {errors.prof && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.profession}
+                  {errors.prof}
                 </p>
               )}
 
           </div>
+          
 
-          {/* Organisation */}
-
-          <div className="flex flex-col gap-1.5">
-
+          {form.prof === 'Autre' && (
+          <div className="mt-4">
             <label className="text-xs font-semibold text-slate-600">
-
-              Organisation
-
+              Précisez
             </label>
 
             <input
-              name="organization"
               type="text"
-              placeholder="Université, entreprise..."
+              name="prof_other"
+              value={form.prof_other}
               onChange={handleChange}
-              className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-teal-dark transition-colors"
+              placeholder="Précisez..."
+              className="
+                w-full
+                rounded-2xl
+                border-2
+                border-slate-200
+                px-4
+                py-4
+                focus:outline-none
+                focus:ring-2
+                focus:ring-teal-dark
+              "
             />
-
           </div>
+          )}
 
-          {/* Motivation */}
+          
 
-          <div className="flex flex-col gap-1.5">
-
+          {/* Domaine d'Expertise */}
+          <div>
             <label className="text-xs font-semibold text-slate-600">
+              Domaine d'expertise 
+            </label>
+            <div className="relative">
+              <select
+                name="domaine"
+                value={form.domaine}
+                onChange={handleChange}
+                className={`
+                  w-full
+                  appearance-none
+                  border-2
+                  rounded-xl
+                  px-3
+                  py-2.5
+                  pr-10
+                  text-sm
+                  bg-white
+                  transition-colors
+                  focus:outline-none
+                  ${
+                    errors.prof
+                      ? "border-red-500"
+                      : "border-slate-200 focus:border-teal-dark"
+                  }
+                `}
+                >
+                <option value="">Sélectionnez une option</option>
 
-              Motivation
+                  {Domaine.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+              </select>
+            </div>
 
+            {errors.domaine && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.domaine}
+                </p>
+              )}
+
+            </div>
+          
+
+          {form.prof === 'Autre' && (
+          <div className="mt-4">
+            <label className="text-xs font-semibold text-slate-600">
+              Précisez
             </label>
 
-            <textarea
-              required
-              name="motivation"
-              rows={3}
-              placeholder="Pourquoi souhaitez-vous participer ?"
+            <input
+              type="text"
+              name="domaine_other"
+              value={form.domaine_other}
               onChange={handleChange}
-              className="border-2 border-slate-200 rounded-xl px-3 py-2.5 text-sm resize-none focus:outline-none focus:border-teal-dark transition-colors"
+              placeholder="Précisez..."
+              className="
+                w-full
+                rounded-2xl
+                border-2
+                border-slate-200
+                px-4
+                py-4
+                focus:outline-none
+                focus:ring-2
+                focus:ring-teal-dark
+              "
             />
-
           </div>
+          )}
+          
 
           {/* Source */}
 
           <div>
-            <label className="block mb-2 font-semibold text-slate-700">
+            <label className="text-xs font-semibold text-slate-600">
               Comment avez-vous entendu parler de nous ?
             </label>
           <div className="relative">
@@ -503,35 +559,7 @@ export default function RegistrationModal({
               )}
 
           </div>
-
           
-
-          {form.heard_from === 'Autre' && (
-          <div className="mt-4">
-            <label className="block mb-2 font-semibold text-slate-700">
-              Précisez
-            </label>
-
-            <input
-              type="text"
-              name="heard_from_other"
-              value={form.heard_from_other}
-              onChange={handleChange}
-              placeholder="Précisez..."
-              className="
-                w-full
-                rounded-2xl
-                border-2
-                border-slate-200
-                px-4
-                py-4
-                focus:outline-none
-                focus:ring-2
-                focus:ring-teal-dark
-              "
-            />
-          </div>
-          )}
 
         <div className="flex items-start gap-3">
           <input

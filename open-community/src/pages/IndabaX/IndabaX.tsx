@@ -9,34 +9,42 @@ import {
   ChevronDown,
   CheckCircle,
   ChevronRight,
+  Wallet,
+  Landmark,
+  ChartColumn,
+  Pickaxe,
+  Zap,
 } from 'lucide-react';
 
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-//import RegistrationModal from '../../components/RegistrationModal';
-import HandleRegistration from '../../components/HandleRegistration';
+import RegistrationModal from '../../components/RegistrationModal';
+//import HandleRegistration from '../../components/HandleRegistration';
 
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import logo from '../../assets/images/logo1.png';
+import logo from '../../assets/images/logo1.webp';
 
 // import alx from '../../assets/images/alx.png';
 // import unesco from '../../assets/images/unesco.png';
-import tamkin from '../../assets/images/tamkin.png';
-import pafiid from '../../assets/images/pafiid.jpg';
-import mr from '../../assets/images/mr.png';
-import indabaxLogo from '../../assets/images/indaba.png';
+import tamkin from '../../assets/images/tamkin.webp';
+import pafiid from '../../assets/images/pafiid.webp';
+import mr from '../../assets/images/mr.webp';
+import bcm from '../../assets/images/bcm.png';
+import ane from '../../assets/images/ANE.png';
+
+import indabaxLogo from '../../assets/images/indaba.webp';
 import mihLogo from '../../assets/images/2mih.png';
-import bann from '../../assets/images/bann.jpg';
+import bann from '../../assets/images/bann.webp';
 
 
 import { api } from '../../services/api';
 
 export default function IndabaXMauritania() {
   const navigate = useNavigate();
-  //const [showSelectedEvent, setSelectedEvent] = useState(false);
+  const [showSelectedEvent, setSelectedEvent] = useState(false);
 
   const [loading, setLoading] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
@@ -47,6 +55,85 @@ export default function IndabaXMauritania() {
 
   // For form validation errors (an object)
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const dataThemes = [
+  {
+    title: "Accès au financement & Inclusion financière",
+    icon: Wallet,
+    description:
+      "Explorer les données relatives à l'accès aux services financiers afin d'identifier les disparités et proposer des solutions favorisant une meilleure inclusion financière.",
+    tags: [
+      "Microfinance",
+      "Crédits",
+      "Banques",
+      "Inclusion",
+      "Épargne",
+    ],
+  },
+  {
+    title: "Crédits bancaires par secteur",
+    icon: Landmark,
+    description:
+      "Analyser la répartition des crédits entre les différents secteurs économiques ainsi que leurs échéances.",
+    tags: [
+      "Agriculture",
+      "Commerce",
+      "Industrie",
+      "Court terme",
+      "Long terme",
+    ],
+  },
+  {
+    title: "Comptes nationaux & Macroéconomie",
+    icon: ChartColumn,
+    description:
+      "Exploiter les principaux indicateurs économiques pour mieux comprendre la dynamique économique nationale.",
+    tags: [
+      "PIB",
+      "Investissements",
+      "Croissance",
+      "Valeur ajoutée",
+    ],
+  },
+  {
+    title: "Production minière nationale",
+    icon: Pickaxe,
+    description:
+      "Créer des analyses ou visualisations à partir des statistiques nationales sur la production minière.",
+    tags: [
+      "Fer",
+      "Or",
+      "Cuivre",
+      "Tonnes",
+      "Onces",
+    ],
+  },
+  {
+    title: "Démographie & Population",
+    icon: Users,
+    description:
+      "Étudier la répartition de la population afin de produire des analyses territoriales et sociales.",
+    tags: [
+      "Population",
+      "Régions",
+      "Genre",
+      "Âge",
+      "Densité",
+    ],
+  },
+  {
+    title: "Énergie & Hydrocarbures",
+    icon: Zap,
+    description:
+      "Analyser les statistiques de consommation énergétique pour imaginer des solutions innovantes.",
+    tags: [
+      "Gaz",
+      "Pétrole",
+      "Électricité",
+      "Consommation",
+    ],
+  },
+];
 
 
   const [form, setForm] = useState({
@@ -83,75 +170,95 @@ export default function IndabaXMauritania() {
   ];
 
   const agenda = [
-    {
-      day: 'Jour 1',
-      date: 'Vendredi 31 juillet',
-      items: [
-        {
-          time: '08h00 – 09h00',
-          title: "Accueil & cérémonie d'ouverture",
-        },
-        {
-          time: '09h00 – 10h00',
-          title: 'Panel 1',
-        },
-        {
-          time: '10h00 – 11h00',
-          title: 'Panel 2',
-        },
-        {
-          time: '11h00 – 12h00',
-          title: 'Présentation du challenge, des jeux de données et des outils',
-        },
-        {
-          time: '12h00 – 14h00',
-          title: 'Visite des stands & networking',
-        },
-        {
-          time: '14h00 – 16h00',
-          title: 'Atelier mentorat #1 — Data Visualisation',
-        },
-        {
-          time: '16h00 – 18h00',
-          title: 'Atelier mentorat #2 — Storytelling & communication visuelle',
-        },
-      ],
-    },
-  
-    {
-      day: 'Jour 2',
-      date: 'Samedi 1 août',
-      items: [
-        {
-          time: '08h00 – 12h00',
-          title: 'Travail en équipe : analyse et conception',
-        },
-        {
-          time: '12h00 – 13h00',
-          title: 'Pause déjeuner',
-        },
-        {
-          time: '13h00 – 18h00',
-          title: 'Finalisation des livrables & dépôt final',
-        },
-      ],
-    },
-  
-    {
-      day: 'Jour 3',
-      date: 'Dimanche 2 août',
-      items: [
-        {
-          time: '16h00 – 18h00',
-          title: 'Pitch des équipes devant le jury + Questions',
-        },
-        {
-          time: '18h00 – 19h00',
-          title: 'Clôture & remise des prix',
-        },
-      ],
-    },
-  ];
+  {
+    day: 'Intro',
+    date: 'Vendredi 31 juillet',
+    items: [
+      {
+        time: '08h30 – 09h00',
+        title: 'Accueil des participants & enregistrement',
+      },
+      {
+        time: '09h00 – 09h30',
+        title: "Cérémonie officielle d'ouverture",
+      },
+      {
+        time: '09h30 – 10h30',
+        title: 'Présentation du Hackathon : objectifs, règlement et critères d’évaluation',
+      },
+      {
+        time: '10h30 – 12h00',
+        title: 'Présentation des jeux de données et des défis à relever',
+      },
+      {
+        time: '12h00 – 13h30',
+        title: 'Pause déjeuner & networking',
+      },
+      {
+        time: '13h30 – 15h00',
+        title: 'Présentation des livrables attendus et des outils mis à disposition',
+      },
+      {
+        time: '15h00 – 16h00',
+        title: 'Session Questions & Réponses',
+      },
+      {
+        time: '16h00 – 17h00',
+        title: 'Formation des équipes & préparation du hackathon',
+      },
+    ],
+  },
+
+  {
+    day: 'Hack Day',
+    date: 'Samedi 1 août',
+    items: [
+      {
+        time: '08h30',
+        title: 'Lancement officiel du hackathon',
+      },
+      {
+        time: '08h30 – 13h00',
+        title: 'Travail des équipes avec accompagnement des mentors et experts',
+      },
+      {
+        time: '13h00 – 23h59',
+        title: 'Développement des projets en autonomie',
+      },
+      {
+        time: '23h59',
+        title: 'Date limite de soumission des projets',
+      },
+    ],
+  },
+
+  {
+    day: 'Pitch & Remise de Prix',
+    date: 'Dimanche 2 août',
+    items: [
+      {
+        time: '09h00 – 11h30',
+        title: 'Pitch des équipes devant le jury',
+      },
+      {
+        time: '11h30 – 12h30',
+        title: 'Délibération du jury',
+      },
+      {
+        time: '14h00 – 15h00',
+        title: "Panel : IA, Open Data et innovation au service du développement",
+      },
+      {
+        time: '15h00 – 16h00',
+        title: 'Annonce des lauréats & remise des prix',
+      },
+      {
+        time: '16h00',
+        title: 'Clôture officielle & photo de famille',
+      },
+    ],
+  },
+];
 
 const eventDate = new Date("2026-07-31T08:00:00");
 
@@ -292,14 +399,6 @@ useEffect(() => {
             >
             <div className="flex flex-col gap-10">
 
-              {/* Logos */}
-
-              {/* <div className="flex flex-wrap items-center gap-8 pb-6 border-b border-slate-100">
-                <img src={indabaxLogo} className="h-6"/>
-                <img src={mihLogo} className="h-8"/>
-                <img src={logo} className="h-8"/>
-              </div> */}
-
  
 
               {/* Header */}
@@ -372,74 +471,105 @@ useEffect(() => {
                 </div>
               </div>
 
-                <h1 className="text-5xl text-slate-900 font-bold mt-6 mb-6">
+                <h1 className="text-3xl font-bold mt-6 mb-6">
                   La Data au service de la Mauritanie
                 </h1>
 
-                <p className="text-lg text-slate-600 leading-relaxed">
+                <p className="text-lg text-slate-600 leading-relaxed mb-6">
                   Un événement dédié à l'apprentissage, l'innovation et la collaboration autour de la data et l'IA.
                 </p>
                 
                 <button
-                  onClick={HandleRegistration}
-                  // onClick={() => setSelectedEvent(true)}
-                  className="bg-teal-dark text-white p-4 rounded-2xl font-bold text-sm flex items-center 
-                  justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-4 "
+                  
+                  onClick={() => setSelectedEvent(true)}
+                  className="w-full md:w-auto bg-teal-dark text-white p-4 
+                  rounded-2xl font-bold text-sm flex items-center justify-center 
+                  gap-2 hover:opacity-90 transition-all disabled:opacity-50"
                 >
                   Je réserve ma place
                 </button>
-                
+                <RegistrationModal
+                  isOpen={showSelectedEvent}
+                  onClose={() => setSelectedEvent(false)}
+                  eventSlug="indabax-mr-2026"
+                  eventTitle="IndabaX Mauritanie 2026"
+                />
               </div>
 
               {/* Meta */}
-
-              <div className="divide-y divide-slate-200 border-y border-slate-200">
-
-              {/* {[
-                {
-                  icon: <Calendar size={18} />,
-                  label: 'Date',
-                  value: '24 au 26 Juillet',
-                },
-                {
-                  icon: <MapPin size={18} />,
-                  label: 'Lieu',
-                  value: 'Nouakchott',
-                },
-                {
-                  icon: <Users size={18} />,
-                  label: 'Places',
-                  value: 'Limitées',
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: index * 0.15,
-                  }}
-                  className="flex items-center justify-between py-5"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="text-teal-dark">
-                      {item.icon}
-                    </div>
-
-                    <span className="text-slate-500 uppercase text-sm tracking-wide">
-                      {item.label}
-                    </span>
-                  </div>
-
-                  <span className="font-semibold text-slate-900">
-                    {item.value}
-                  </span>
-                </motion.div>
-              ))} */}
-
-              </div>
               
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: .6 }}
+                  className="max-w-3xl mx-auto"
+                >
+
+                  <h2 className="text-3xl font-bold mb-6">
+                    Les données qui alimenteront vos innovations
+                  </h2>
+
+                  <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+                    Pendant le hackathon, les équipes auront accès à des
+                    ensembles de données issus d'institutions nationales
+                    afin de répondre à des problématiques concrètes.
+                  </p>
+                </motion.div>
+
+                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                  {dataThemes.map((theme, index) => {
+                    const Icon = theme.icon;
+
+                    return (
+                      <motion.div
+                      key={theme.title}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    // viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay: index * 0.2,
+                    }}
+                    className="
+                    group
+                    bg-white
+                    border border-slate-200
+                    rounded-2xl
+                    p-6
+                    hover:-translate-y-1
+                    hover:shadow-xl
+                    transition-[transform,box-shadow] duration-300 ease-out
+                    ">
+                        <div className="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center mb-6">
+                          <Icon
+                            size={28}
+                            className="text-teal-dark"
+                          />
+                        </div>
+
+                        <h3 className="text-xl font-bold text-gray-900">
+                          {theme.title}
+                        </h3>
+
+                        <p className="text-sm text-gray-600 mt-4 leading-relaxed">
+                          {theme.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2 mt-6">
+                          {theme.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-3 py-1 rounded-full bg-teal-50 text-teal-dark text-sm font-medium"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
 
               {/* Organisateurs & Partenaires */}
               <div>
@@ -503,15 +633,28 @@ useEffect(() => {
                       },
 
                       {
-                        logo: tamkin,
-                        name: "tamkin",
-                        className: "h-10",
+                        logo: ane,
+                        name: "ane",
+                        className: "h-12",
                       },
+
                       {
+                        logo: bcm,
+                        name: "bcm",
+                        className: "h-9",
+                      },
+                       {
                         logo: pafiid,
                         name: "pafiid",
                         className: "h-11",
                       },
+
+                      {
+                        logo: tamkin,
+                        name: "tamkin",
+                        className: "h-10",
+                      },
+                     
           
                     ].map((partner, idx) => (
                       <motion.div
@@ -1184,9 +1327,9 @@ useEffect(() => {
                       </div>
 
                       <button
-                        onClick={HandleRegistration}
-                        // type="submit"
-                        // disabled={loading}
+                        //onClick={RegistrationModal}
+                        type="submit"
+                        disabled={loading}
                         className="bg-teal-dark text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 mt-2"
                       >
 

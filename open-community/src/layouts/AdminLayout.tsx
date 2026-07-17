@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import logo from '../assets/images/logo3.png';
+import logo from '../assets/images/logo3.webp';
 import {
   LayoutDashboard,
   Users,

@@ -8,7 +8,7 @@ import Impact from '../sections/Impact';
 import Community from '../sections/Community';
 import Events from '../sections/Events';
 import Partners from '../sections/Partners';
-import CTA from '../sections/CTA';
+//import CTA from '../sections/CTA';
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -49,7 +49,6 @@ useEffect(() => {
         <Community />
         <Events />
         <Partners />
-        <CTA />
       </main>
       <Footer />
     </div>
