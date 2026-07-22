@@ -15,7 +15,7 @@ import {
   Zap,
 } from 'lucide-react';
 
-import HandleClosure from '../../components/HandleClosure';
+//import HandleClosure from '../../components/HandleClosure';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +37,8 @@ import ane from '../../assets/images/ANE.png';
 import indabaxLogo from '../../assets/images/indaba.webp';
 import mihLogo from '../../assets/images/2mih.png';
 import bann from '../../assets/images/bann.webp';
+import RegistrationClosedModal from '../../components/RegistrationClosedModal';
+
 
 
 //import { api } from '../../services/api';
@@ -246,6 +248,7 @@ export default function IndabaXMauritania() {
   },
 ];
 
+const [showRegistrationClosed, setShowRegistrationClosed] = useState(false);
 const eventDate = new Date("2026-07-31T08:00:00");
 
 const [timeLeft, setTimeLeft] = useState({
@@ -406,7 +409,7 @@ useEffect(() => {
                 
                 <button
                   
-                  onClick={HandleClosure}
+                  onClick={() => setShowRegistrationClosed(true)}
                   className="w-full md:w-auto bg-teal-dark text-white p-4 
                   rounded-2xl font-bold text-sm flex items-center justify-center 
                   gap-2 hover:opacity-90 transition-all disabled:opacity-50"
@@ -418,6 +421,10 @@ useEffect(() => {
                   onClose={() => setSelectedEvent(false)}
                   eventSlug="indabax-mr-2026"
                   eventTitle="IndabaX Mauritanie 2026"
+                />
+                <RegistrationClosedModal
+                  open={showRegistrationClosed}
+                  onClose={() => setShowRegistrationClosed(false)}
                 />
               </div>
 

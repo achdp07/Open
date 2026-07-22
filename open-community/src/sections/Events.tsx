@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { api } from '../services/api';
 import RegistrationModal from '../components/RegistrationModal';
 //import HandleRegistration from '../components/HandleRegistration';
-import HandleClosure from '../components/HandleClosure';
+//import HandleClosure from '../components/HandleClosure';
+import RegistrationClosedModal from '../components/RegistrationClosedModal';
 
 interface Event {
   id: number;
@@ -15,6 +16,7 @@ interface Event {
 }
 
 const Events = () => {
+  const [showRegistrationClosed, setShowRegistrationClosed] = useState(false);
   const [events, setEvents] = useState<Event[]>([]);
    const [selectedEvent, setSelectedEvent] =
     useState<Event | null>(null);
@@ -157,7 +159,7 @@ const Events = () => {
 
                 <button
 
-                  onClick={HandleClosure}
+                  onClick={() => setShowRegistrationClosed(true)}
                   //  onClick={() => {
                   //   setSelectedEvent(event);
                   //  }}
@@ -169,6 +171,11 @@ const Events = () => {
                   S'inscrire
 
                 </button>
+
+                <RegistrationClosedModal
+                  open={showRegistrationClosed}
+                  onClose={() => setShowRegistrationClosed(false)}
+                />              
 
                 </motion.div>
 
