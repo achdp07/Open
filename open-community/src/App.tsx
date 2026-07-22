@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 import RoleGuard from './guards/RoleGuard';
 
 import Home from './pages/Home';
-// import Join from './pages/Join';
+import Join from './pages/Join';
 import ProgramsPage from './pages/ProgramsPage';
 import ProgramDetail from './pages/ProgramDetail';
 import IndabaXMauritania from './pages/IndabaX/IndabaX';
@@ -59,7 +59,7 @@ export default function App() {
       <Routes>
         {/* Public */}
         <Route path="/" element={<Home />} />
-        {/* <Route path="/join" element={<Join />} /> */}
+        <Route path="/join" element={<Join />} />
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/programs/:id" element={<ProgramDetail />} />
         <Route path="/indabax" element={<IndabaXMauritania />} />

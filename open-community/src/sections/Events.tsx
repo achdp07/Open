@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { api } from '../services/api';
 import RegistrationModal from '../components/RegistrationModal';
 //import HandleRegistration from '../components/HandleRegistration';
+import HandleClosure from '../components/HandleClosure';
 
 interface Event {
   id: number;
@@ -156,10 +157,10 @@ const Events = () => {
 
                 <button
 
-                  //onClick={HandleRegistration}
-                   onClick={() => {
-                    setSelectedEvent(event);
-                   }}
+                  onClick={HandleClosure}
+                  //  onClick={() => {
+                  //   setSelectedEvent(event);
+                  //  }}
 
                   className="w-full py-3 rounded-xl bg-teal-dark text-white font-bold hover:opacity-90 transition"
 

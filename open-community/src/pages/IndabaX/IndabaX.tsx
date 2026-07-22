@@ -15,7 +15,7 @@ import {
   Zap,
 } from 'lucide-react';
 
-
+import HandleClosure from '../../components/HandleClosure';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -406,7 +406,7 @@ useEffect(() => {
                 
                 <button
                   
-                  onClick={() => setSelectedEvent(true)}
+                  onClick={HandleClosure}
                   className="w-full md:w-auto bg-teal-dark text-white p-4 
                   rounded-2xl font-bold text-sm flex items-center justify-center 
                   gap-2 hover:opacity-90 transition-all disabled:opacity-50"

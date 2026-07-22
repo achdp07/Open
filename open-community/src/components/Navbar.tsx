@@ -7,6 +7,8 @@ import logo from '../assets/images/logo1.webp'
 import { useAuth } from '../context/AuthContext';
 import { User, Settings, LogOut, BookOpen } from 'lucide-react';
 //import HandleRegistration from './HandleRegistration';
+import HandleClosure from './HandleClosure';
+
 
 import RegistrationModal from './RegistrationModal';
 
@@ -180,7 +182,8 @@ const Navbar = () => {
             </div>
           ) : (
             <button
-              onClick={() => setSelectedEvent(true)}
+              onClick={HandleClosure}
+              //to='/join'
               className="bg-teal-dark text-white px-6 py-2.5 rounded-2xl text-sm font-semibold"
             >
               S'inscrire

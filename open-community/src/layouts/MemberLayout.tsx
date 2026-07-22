@@ -59,7 +59,7 @@ export default function MemberLayout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
 
-    navigate('/join', {
+    navigate('/', {
       replace: true,
     });
   };
@@ -210,7 +210,7 @@ export default function MemberLayout() {
         {/* Top Bar */}
         <header className="sticky top-0 z-30 h-16 border-b border-slate-200 bg-white/90 backdrop-blur flex items-center justify-between px-2 lg:px-6">
           <h2 className="font-semibold text-slate-900">
-            Open Learning
+            Open Community
           </h2>
 
           <div className="w-9 h-9 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-sm font-bold">
