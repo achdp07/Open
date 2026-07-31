@@ -181,15 +181,24 @@ const Navbar = () => {
           </AnimatePresence>
             </div>
           ) : (
-            <button
-              onClick={HandleClosure}
-              //to='/join'
+            // <button
+            //   onClick={HandleClosure}
+            //   //to='/join'
+            //   className="bg-teal-dark text-white px-6 py-2.5 rounded-2xl text-sm font-semibold"
+            // >
+            //   S'inscrire
+            // </button>
+
+            <Link
+              to='/join'
               className="bg-teal-dark text-white px-6 py-2.5 rounded-2xl text-sm font-semibold"
             >
               S'inscrire
-            </button>
+            </Link>
             
           )}
+
+
 
           <RegistrationModal
             isOpen={showSelectedEvent}
