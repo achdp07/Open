@@ -24,7 +24,7 @@ import TaskPage from './pages/dashboard/member/TaskPage';
 
 
 import AdminLayout from './layouts/AdminLayout';
-import AdminDashboard from './pages/dashboard/Admin/AdminDashboard';
+//import AdminDashboard from './pages/dashboard/Admin/AdminDashboard';
 import AdminUsers from './pages/dashboard/Admin/AdminUsers';
 // import AdminPrograms from './pages/dashboard/Admin/AdminPrograms';
 import AdminSettings from './pages/dashboard/Admin/AdminSettings';
@@ -135,7 +135,7 @@ export default function App() {
           }
         >
           <Route path="/dashboard/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
+            {/* <Route index element={<AdminDashboard />} /> */}
             <Route path="users" element={<AdminUsers />} />
             {/* <Route path="programs" element={<AdminPrograms />} /> */}
             <Route path="settings" element={<AdminSettings />} />
