@@ -172,10 +172,7 @@ const Events = () => {
 
                 </button>
 
-                <RegistrationClosedModal
-                  open={showRegistrationClosed}
-                  onClose={() => setShowRegistrationClosed(false)}
-                />              
+                           
 
                 </motion.div>
 
@@ -189,27 +186,17 @@ const Events = () => {
         )}
 
         {/* Modal */}
+         <RegistrationClosedModal
+                  open={showRegistrationClosed}
+                  onClose={() => setShowRegistrationClosed(false)}
+                />  
 
-        <RegistrationModal
-
-          isOpen={!!selectedEvent}
-
-          onClose={() =>
-            setSelectedEvent(null)
-          }
-
-          eventSlug={
-            selectedEvent?.slug || ''
-          }
-
-          eventTitle={
-            selectedEvent?.title || ''
-          }
-
-        />
 
       </div>
+
     </section>
+
+    
   );
 };
 

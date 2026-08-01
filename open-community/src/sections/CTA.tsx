@@ -16,10 +16,10 @@ const CTA = () => {
               de la nouvelle génération de leaders tech.
             </p>
             <Link
-              to="/indabax"
+              to="/indabax/submit"
               className="bg-white text-teal-dark px-12 py-5 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all shadow-2xl inline-block"
             >
-               Participer à IndabaX
+               Soumettre votre projet
             </Link>
           </div>
         </div>

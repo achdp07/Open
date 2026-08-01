@@ -38,6 +38,8 @@ import ModeratorLayout from './layouts/ModeratorLayout';
 import ModeratorDashboard from './pages/dashboard/Moderator/ModeratorDashboard';
 import ModeratorCommunity from './pages/dashboard/Moderator/ModeratorCommunity';
 
+import SubmissionPage from './components/submission/SubmissionPage';
+
 import NotFound from './components/NotFound';
 
 import { useAuth } from './context/AuthContext';
@@ -63,6 +65,7 @@ export default function App() {
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/programs/:id" element={<ProgramDetail />} />
         <Route path="/indabax" element={<IndabaXMauritania />} />
+        <Route path="/indabax/submit" element={<SubmissionPage />}/>
         
         
 

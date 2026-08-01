@@ -17,9 +17,10 @@ import {
 
 //import HandleClosure from '../../components/HandleClosure';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-import RegistrationModal from '../../components/RegistrationModal';
+//import RegistrationModal from '../../components/RegistrationModal';
+//import SubmissionPage from '../../components/submission/SubmissionPage';
 //import HandleRegistration from '../../components/HandleRegistration';
 
 import Navbar from '../../components/Navbar';
@@ -37,7 +38,7 @@ import ane from '../../assets/images/ANE.png';
 import indabaxLogo from '../../assets/images/indaba.webp';
 import mihLogo from '../../assets/images/2mih.png';
 import bann from '../../assets/images/bann.webp';
-import RegistrationClosedModal from '../../components/RegistrationClosedModal';
+
 
 
 
@@ -45,7 +46,7 @@ import RegistrationClosedModal from '../../components/RegistrationClosedModal';
 
 export default function IndabaXMauritania() {
   const navigate = useNavigate();
-  const [showSelectedEvent, setSelectedEvent] = useState(false);
+  //const [showSelectedEvent, setSelectedEvent] = useState(false);
 
   //const [loading, setLoading] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
@@ -248,7 +249,8 @@ export default function IndabaXMauritania() {
   },
 ];
 
-const [showRegistrationClosed, setShowRegistrationClosed] = useState(false);
+
+//const [showRegistrationClosed, setShowRegistrationClosed] = useState(false);
 const eventDate = new Date("2026-07-31T08:00:00");
 
 const [timeLeft, setTimeLeft] = useState({
@@ -407,25 +409,26 @@ useEffect(() => {
                   Un événement dédié à l'apprentissage, l'innovation et la collaboration autour de la data et l'IA.
                 </p>
                 
-                <button
-                  
-                  onClick={() => setShowRegistrationClosed(true)}
+                <Link
+                  to="/indabax/submit"
+                  //onClick={() => setShowRegistrationClosed(true)}
                   className="w-full md:w-auto bg-teal-dark text-white p-4 
                   rounded-2xl font-bold text-sm flex items-center justify-center 
                   gap-2 hover:opacity-90 transition-all disabled:opacity-50"
                 >
-                  Je m'inscris
-                </button>
-                <RegistrationModal
+                  Soumettre notre projet
+                </Link>
+
+                {/* <RegistrationModal
                   isOpen={showSelectedEvent}
                   onClose={() => setSelectedEvent(false)}
                   eventSlug="indabax-mr-2026"
                   eventTitle="IndabaX Mauritanie 2026"
-                />
-                <RegistrationClosedModal
+                /> */}
+                {/* <RegistrationClosedModal
                   open={showRegistrationClosed}
                   onClose={() => setShowRegistrationClosed(false)}
-                />
+                /> */}
               </div>
 
               {/* Meta */}
