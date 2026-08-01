@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { SubmissionForm } from "./types";
+import type { SubmissionForm } from "./Type";
 
 import FileUploader from "./FileUploader";
 import VisualAssetsUploader from "./VisualAssetsUploader";

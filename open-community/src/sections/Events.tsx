@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Calendar, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { api } from '../services/api';
-import RegistrationModal from '../components/RegistrationModal';
+//import RegistrationModal from '../components/RegistrationModal';
 //import HandleRegistration from '../components/HandleRegistration';
 //import HandleClosure from '../components/HandleClosure';
 import RegistrationClosedModal from '../components/RegistrationClosedModal';
@@ -18,7 +18,7 @@ interface Event {
 const Events = () => {
   const [showRegistrationClosed, setShowRegistrationClosed] = useState(false);
   const [events, setEvents] = useState<Event[]>([]);
-   const [selectedEvent, setSelectedEvent] =
+   //const [selectedEvent, setSelectedEvent] =
     useState<Event | null>(null);
 
   const [isLoading, setIsLoading] =

@@ -7,7 +7,7 @@ import logo from '../assets/images/logo1.webp'
 import { useAuth } from '../context/AuthContext';
 import { User, Settings, LogOut, BookOpen } from 'lucide-react';
 //import HandleRegistration from './HandleRegistration';
-import HandleClosure from './HandleClosure';
+//import HandleClosure from './HandleClosure';
 
 
 import RegistrationModal from './RegistrationModal';
